@@ -17,7 +17,7 @@
 package nl.ivonet.boundary;
 
 import com.google.gson.Gson;
-import nl.ivonet.dependency.GsonFactory;
+import nl.ivonet.parser.GsonFactory;
 import org.hamcrest.core.Is;
 import org.junit.Before;
 import org.junit.Test;

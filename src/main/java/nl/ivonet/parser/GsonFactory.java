@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package nl.ivonet.dependency;
+package nl.ivonet.parser;
 
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package nl.ivonet.isbndb;
+package nl.ivonet.service;
 
 import org.junit.Before;
 
@@ -23,11 +23,11 @@ import org.junit.Before;
  * @author Ivo Woltring
  */
 public class IsbndbTest {
-    private Isbndb isbndb;
+    private Isbndbs isbndbs;
 
     @Before
     public void setUp() throws Exception {
-        this.isbndb = new Isbndb();
+        this.isbndbs = new Isbndbs();
     }
 
 //    @Test
