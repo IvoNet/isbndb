@@ -1,0 +1,36 @@
+{
+  "index_searched": "category_name",
+  "page_count": 1,
+  "current_page": 1,
+  "result_count": "3",
+  "data": [
+    {
+      "child_ids": [
+        "computers.programming.languages",
+        "computers.programming.object_oriented",
+        "computers.programming.structured"
+      ],
+      "parent_id": "computers",
+      "name_latin": "Programming",
+      "category_id": "computers.programming",
+      "summary": "",
+      "name": "Programming"
+    },
+    {
+      "summary": "",
+      "name": "Programming",
+      "category_id": "computers.computer_games.programming",
+      "name_latin": "Programming",
+      "parent_id": "computers.computer_games",
+      "child_ids": []
+    },
+    {
+      "name_latin": "Programming",
+      "category_id": "computers.microcomputers.programming",
+      "name": "Programming",
+      "summary": "",
+      "child_ids": [],
+      "parent_id": "computers.microcomputers"
+    }
+  ]
+}

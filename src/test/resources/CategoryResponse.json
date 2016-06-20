@@ -1,0 +1,18 @@
+{
+  "index_searched": "category_id",
+  "data": [
+    {
+      "summary": "",
+      "name": "Fantasy",
+      "category_id": "genres.fantasy",
+      "name_latin": "Fantasy",
+      "parent_id": "genres",
+      "child_ids": [
+        "genres.fantasy.bibliography",
+        "genres.fantasy.history_and_criticism",
+        "genres.fantasy.juvenile",
+        "genres.fantasy.translations"
+      ]
+    }
+  ]
+}
