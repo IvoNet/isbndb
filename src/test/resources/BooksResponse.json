@@ -1,0 +1,340 @@
+{
+  "page_count": 45927,
+  "index_searched": "title",
+  "data": [
+    {
+      "dewey_decimal": "813",
+      "lcc_number": "",
+      "summary": "",
+      "title_long": "Magic Bleeds (Kate Daniels, Book 4)",
+      "physical_description_text": "0.0\"x0.0\"x0.0\"; 1.0 lb; 432 pages",
+      "publisher_text": "Ace",
+      "notes": "",
+      "title": "Magic Bleeds",
+      "language": "",
+      "subject_ids": [
+        "science_fiction_fantasy_fantasy_contemporary",
+        "science_fiction_fantasy_fantasy_magic_wizards",
+        "science_fiction_fantasy_fantasy_general"
+      ],
+      "isbn13": "9780441018529",
+      "edition_info": "Paperback; 2010-05-25",
+      "marc_enc_level": "~",
+      "dewey_normal": "813",
+      "awards_text": "",
+      "author_data": [
+        {
+          "name": "Ilona Andrews",
+          "id": "ilona_andrews"
+        }
+      ],
+      "isbn10": "0441018521",
+      "title_latin": "Magic Bleeds",
+      "publisher_name": "Ace",
+      "urls_text": "",
+      "publisher_id": "ace",
+      "book_id": "magic_bleeds"
+    },
+    {
+      "edition_info": "Audio CD; 2010-05-25",
+      "marc_enc_level": "~",
+      "dewey_normal": "813",
+      "subject_ids": [
+        "literature_fiction_genre_fiction_horror_occult",
+        "science_fiction_fantasy_fantasy_contemporary",
+        "science_fiction_fantasy_fantasy_magic_wizards"
+      ],
+      "isbn13": "9781400167319",
+      "title": "Magic Bleeds",
+      "language": "",
+      "book_id": "magic_bleeds_a01",
+      "publisher_id": "tantor_media",
+      "urls_text": "",
+      "author_data": [
+        {
+          "name": "Ilona Andrews",
+          "id": "ilona_andrews"
+        },
+        {
+          "id": "renee_raudman",
+          "name": "Renï¿½e Raudman"
+        }
+      ],
+      "title_latin": "Magic Bleeds",
+      "awards_text": "",
+      "isbn10": "1400167310",
+      "publisher_name": "Tantor Media",
+      "summary": "Kate Daniels faces her most powerful foe yet in this fourth entry in Ilona Andrews's New York Times bestselling series.",
+      "lcc_number": "",
+      "dewey_decimal": "813",
+      "publisher_text": "Tantor Media",
+      "notes": "",
+      "title_long": "Magic Bleeds (Kate Daniels)",
+      "physical_description_text": "5.3\"x7.4\"x0.6\"; 0.2 lb"
+    },
+    {
+      "book_id": "magic_bleeds_a02",
+      "publisher_id": "tantor_media",
+      "urls_text": "",
+      "publisher_name": "Tantor Media",
+      "author_data": [
+        {
+          "id": "ilona_andrews",
+          "name": "Ilona Andrews"
+        },
+        {
+          "id": "renee_raudman",
+          "name": "Renï¿½e Raudman"
+        }
+      ],
+      "title_latin": "Magic Bleeds",
+      "awards_text": "",
+      "isbn10": "140014731X",
+      "dewey_normal": "813",
+      "marc_enc_level": "~",
+      "edition_info": "Audio CD; 2010-05-25",
+      "isbn13": "9781400147311",
+      "subject_ids": [
+        "literature_fiction_genre_fiction_horror_occult",
+        "literature_fiction_poetry_ancient_classical_medieval",
+        "science_fiction_fantasy_fantasy_contemporary",
+        "science_fiction_fantasy_fantasy_magic_wizards",
+        "science_fiction_fantasy_general"
+      ],
+      "language": "",
+      "title": "Magic Bleeds",
+      "notes": "",
+      "publisher_text": "Tantor Media",
+      "physical_description_text": "6.4\"x6.7\"x0.9\"; 0.8 lb",
+      "title_long": "Magic Bleeds (Kate Daniels)",
+      "summary": "Kate Daniels faces her most powerful foe yet in this fourth entry in Ilona Andrews's New York Times bestselling series.",
+      "lcc_number": "",
+      "dewey_decimal": "813"
+    },
+    {
+      "summary": "Kate Daniels faces her most powerful foe yet in this fourth entry in Ilona Andrews's New York Times bestselling series.",
+      "lcc_number": "",
+      "dewey_decimal": "813.6",
+      "publisher_text": "Tantor Media",
+      "notes": "",
+      "title_long": "Magic Bleeds (Kate Daniels)",
+      "physical_description_text": "5.5\"x6.5\"x1.1\"; 0.7 lb",
+      "marc_enc_level": "~",
+      "edition_info": "Audio CD; 2010-05-25",
+      "dewey_normal": "813.6",
+      "subject_ids": [
+        "literature_fiction_genre_fiction_horror_occult",
+        "science_fiction_fantasy_fantasy_contemporary",
+        "science_fiction_fantasy_fantasy_magic_wizards",
+        "science_fiction_fantasy_general"
+      ],
+      "isbn13": "9781400117314",
+      "title": "Magic Bleeds",
+      "language": "",
+      "book_id": "magic_bleeds_a03",
+      "publisher_id": "tantor_media",
+      "urls_text": "",
+      "author_data": [
+        {
+          "id": "ilona_andrews",
+          "name": "Ilona Andrews"
+        },
+        {
+          "id": "renee_raudman",
+          "name": "Renï¿½e Raudman"
+        }
+      ],
+      "awards_text": "",
+      "isbn10": "1400117313",
+      "title_latin": "Magic Bleeds",
+      "publisher_name": "Tantor Media"
+    },
+    {
+      "summary": "",
+      "lcc_number": "",
+      "dewey_decimal": "",
+      "notes": "",
+      "publisher_text": "Gollancz",
+      "physical_description_text": "5.0\"x7.8\"x0.9\"; 0.6 lb; 288 pages",
+      "title_long": "",
+      "dewey_normal": "0",
+      "marc_enc_level": "~",
+      "edition_info": "Paperback; 2010",
+      "isbn13": "9780575093935",
+      "subject_ids": [],
+      "language": "",
+      "title": "Magic Bites",
+      "book_id": "magic_bites_a02",
+      "publisher_id": "gollancz",
+      "urls_text": "",
+      "publisher_name": "Gollancz",
+      "title_latin": "Magic Bites",
+      "awards_text": "",
+      "author_data": [
+        {
+          "id": "ilona_andrews",
+          "name": "Ilona Andrews"
+        }
+      ],
+      "isbn10": "0575093935"
+    },
+    {
+      "title": "Magic Burns",
+      "language": "",
+      "edition_info": "Paperback; 2010",
+      "marc_enc_level": "~",
+      "dewey_normal": "0",
+      "subject_ids": [
+        "literature_fiction",
+        "science_fiction_fantasy_fantasy_contemporary"
+      ],
+      "isbn13": "9780575093942",
+      "urls_text": "",
+      "author_data": [
+        {
+          "name": "Ilona Andrews",
+          "id": "ilona_andrews"
+        }
+      ],
+      "awards_text": "",
+      "title_latin": "Magic Burns",
+      "isbn10": "0575093943",
+      "publisher_name": "Gollancz",
+      "book_id": "magic_burns_a04",
+      "publisher_id": "gollancz",
+      "lcc_number": "",
+      "dewey_decimal": "",
+      "summary": "",
+      "title_long": "",
+      "physical_description_text": "5.0\"x7.7\"x0.9\"; 0.6 lb",
+      "publisher_text": "Gollancz",
+      "notes": ""
+    },
+    {
+      "publisher_text": "Penguin group",
+      "notes": "",
+      "title_long": "Kate Daniels Complete pb Set 1-4 Magic Bites, Magic Burns, Magic Strikes, Magic Bleeds (Kate Daniels)",
+      "physical_description_text": "",
+      "summary": "1-4 in the Kate Daniels Series, includes; Magic Bites, Magic Burns Magic strikes, Magic Bleeds",
+      "lcc_number": "",
+      "dewey_decimal": "",
+      "book_id": "kate_daniels_complete_pb_set_1_4_magic_bites_magic_burns_mag",
+      "publisher_id": "penguin_group",
+      "urls_text": "",
+      "author_data": [
+        {
+          "id": "ilona_andrews",
+          "name": "Ilona Andrews"
+        }
+      ],
+      "title_latin": "Kate Daniels Complete pb Set 1-4 Magic Bites, Magic Burns, Magic Strikes, Magic Bleeds",
+      "isbn10": "3000017739",
+      "awards_text": "",
+      "publisher_name": "Penguin group",
+      "edition_info": "Mass Market Paperback; 2010",
+      "marc_enc_level": "~",
+      "dewey_normal": "0",
+      "subject_ids": [],
+      "isbn13": "9783000017735",
+      "title": "Kate Daniels Complete pb Set 1-4 Magic Bites, Magic Burns, Magic Strikes, Magic Bleeds",
+      "language": ""
+    },
+    {
+      "book_id": "a_kate_daniels_magic_series_collection",
+      "publisher_id": "zatpix_re_packaged_edition",
+      "urls_text": "",
+      "publisher_name": "Zatpix Re-Packaged Edition",
+      "isbn10": "1780484879",
+      "title_latin": "A Kate Daniels Magic Series Collection",
+      "author_data": [
+        {
+          "id": "ilona_andrews",
+          "name": "Ilona Andrews"
+        }
+      ],
+      "awards_text": "",
+      "dewey_normal": "0",
+      "edition_info": "Paperback; 2011-07-23",
+      "marc_enc_level": "~",
+      "isbn13": "9781780484877",
+      "subject_ids": [
+        "literature_fiction"
+      ],
+      "language": "",
+      "title": "A Kate Daniels Magic Series Collection",
+      "notes": "",
+      "publisher_text": "Zatpix Re-Packaged Edition",
+      "physical_description_text": "",
+      "title_long": "A Kate Daniels Magic Series Collection: Magic Slays, Bleeds, Strikes, Burns and Bites",
+      "summary": "",
+      "lcc_number": "",
+      "dewey_decimal": ""
+    },
+    {
+      "language": "",
+      "title": "Magic Strikes",
+      "isbn13": "9780575093959",
+      "subject_ids": [
+        "literature_fiction",
+        "science_fiction_fantasy_fantasy_magic_wizards"
+      ],
+      "dewey_normal": "0",
+      "edition_info": "Paperback; 2010-11",
+      "marc_enc_level": "~",
+      "publisher_name": "Gollancz",
+      "isbn10": "0575093951",
+      "awards_text": "",
+      "title_latin": "Magic Strikes",
+      "author_data": [
+        {
+          "name": "Ilona Andrews",
+          "id": "ilona_andrews"
+        }
+      ],
+      "urls_text": "",
+      "publisher_id": "gollancz",
+      "book_id": "magic_strikes_a02",
+      "dewey_decimal": "",
+      "lcc_number": "",
+      "summary": "",
+      "physical_description_text": "5.1\"x7.7\"x0.9\"; 0.4 lb; 320 pages",
+      "title_long": "Magic Strikes (Kate Daniels Novel)",
+      "notes": "",
+      "publisher_text": "Gollancz"
+    },
+    {
+      "book_id": "magic_slays",
+      "publisher_id": "ace",
+      "urls_text": "",
+      "title_latin": "Magic Slays",
+      "author_data": [
+        {
+          "id": "ilona_andrews",
+          "name": "Ilona Andrews"
+        }
+      ],
+      "awards_text": "",
+      "isbn10": "0441020429",
+      "publisher_name": "Ace",
+      "marc_enc_level": "~",
+      "edition_info": "Paperback; 2011-05-31",
+      "dewey_normal": "813",
+      "subject_ids": [
+        "literature_fiction",
+        "science_fiction_fantasy_fantasy_magic_wizards"
+      ],
+      "isbn13": "9780441020423",
+      "title": "Magic Slays",
+      "language": "",
+      "publisher_text": "Ace",
+      "notes": "",
+      "title_long": "Magic Slays (Kate Daniels, Book 5)",
+      "physical_description_text": "0.0\"x0.0\"x0.0\"; 1.0 lb",
+      "summary": "",
+      "lcc_number": "",
+      "dewey_decimal": "813"
+    }
+  ],
+  "current_page": 1,
+  "result_count": 459265
+}

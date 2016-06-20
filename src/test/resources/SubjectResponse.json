@@ -1,0 +1,18 @@
+{
+  "index_searched": "subject_id",
+  "data": [
+    {
+      "books_count": "5",
+      "subject_id": "science_fiction_fantasy_fantasy_urban",
+      "name_latin": "Science Fiction & Fantasy -- Fantasy -- Urban",
+      "book_ids": [
+        "into_the_darkness_a11",
+        "into_the_dreamlands",
+        "dead_witch_walking_a06",
+        "sugar_and_sin",
+        "fool_moon_book_2_of_the_dresden_files_the_dresden_files_mp3_"
+      ],
+      "name": "Science Fiction & Fantasy -- Fantasy -- Urban"
+    }
+  ]
+}

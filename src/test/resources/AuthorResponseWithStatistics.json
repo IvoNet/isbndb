@@ -1,0 +1,31 @@
+{
+  "data": [
+    {
+      "book_count": "1",
+      "category_ids": [
+        "alphabetically.authors.d.a.n"
+      ],
+      "name": "A-B Daniel",
+      "name_latin": "A-B Daniel",
+      "book_ids": [
+        "reine_de_palmyre_tome_2"
+      ],
+      "subject_ids": [],
+      "last_name": "Daniel",
+      "dates": "",
+      "author_id": "a_b_daniel",
+      "first_name": "A-B"
+    }
+  ],
+  "keystats": {
+    "key_use_granted": "465",
+    "daily_max_pay_uses": "0",
+    "member_use_granted": 465,
+    "free_use_limit": "500",
+    "member_use_requests": 5187,
+    "key_id": "FOOBAR",
+    "key_limit": "none",
+    "key_use_requests": "5187"
+  },
+  "index_searched": "author_id"
+}

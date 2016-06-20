@@ -1,0 +1,38 @@
+{
+  "data": [
+    {
+      "publisher_text": "Ace",
+      "notes": "",
+      "title_long": "Magic Bleeds (Kate Daniels, Book 4)",
+      "physical_description_text": "0.0\"x0.0\"x0.0\"; 1.0 lb; 432 pages",
+      "summary": "",
+      "dewey_decimal": "813",
+      "lcc_number": "",
+      "publisher_id": "ace",
+      "book_id": "magic_bleeds",
+      "isbn10": "0441018521",
+      "awards_text": "",
+      "author_data": [
+        {
+          "name": "Ilona Andrews",
+          "id": "ilona_andrews"
+        }
+      ],
+      "title_latin": "Magic Bleeds",
+      "publisher_name": "Ace",
+      "urls_text": "",
+      "subject_ids": [
+        "science_fiction_fantasy_fantasy_contemporary",
+        "science_fiction_fantasy_fantasy_magic_wizards",
+        "science_fiction_fantasy_fantasy_general"
+      ],
+      "isbn13": "9780441018529",
+      "edition_info": "Paperback; 2010-05-25",
+      "marc_enc_level": "~",
+      "dewey_normal": "813",
+      "title": "Magic Bleeds",
+      "language": ""
+    }
+  ],
+  "index_searched": "isbn"
+}
