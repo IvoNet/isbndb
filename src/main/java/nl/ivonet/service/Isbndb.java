@@ -147,9 +147,9 @@ public class Isbndb {
     }
 
     /**
-     * Searches for subjects based on a search string.
+     * Searches for subject based on a search string.
      *
-     * @param id the subjects you are searching for.
+     * @param id the subject you are searching for.
      * @return {@link SubjectResponse}
      */
     public SubjectResponse subjectById(final String id) {
