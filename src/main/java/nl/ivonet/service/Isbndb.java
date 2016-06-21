@@ -66,7 +66,7 @@ public class Isbndb {
      */
     public AuthorResponse authorById(final String id) {
         final String search = removeAccents(id.replace(" ", "_")
-                                                .toLowerCase());
+                                              .toLowerCase());
         return getAuthor(search);
     }
 
@@ -118,9 +118,24 @@ public class Isbndb {
         return getPublishers(search);
     }
 
+    /**
+     * Searches for publishers based on an id.
+     *
+     * @param name the publisher you are searching for.
+     * @return {@link PublisherResponse}
+     */
+    public PublisherResponse publisherById(final String name) {
+        final String search = removeAccents(name.replace(" ", "_")
+                                                .toLowerCase());
+        return getPublisher(search);
+    }
 
     private PublisherResponse getPublishers(final String search) {
         return this.gson.fromJson(getJsonCollection("publishers", search), PublisherResponse.class);
+    }
+
+    private PublisherResponse getPublisher(final String search) {
+        return this.gson.fromJson(getJsonSingle("publisher", search), PublisherResponse.class);
     }
 
     private BookResponse getBooks(final String search) {

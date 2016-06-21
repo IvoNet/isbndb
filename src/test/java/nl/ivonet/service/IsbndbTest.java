@@ -19,6 +19,7 @@ package nl.ivonet.service;
 import nl.ivonet.boundary.Author;
 import nl.ivonet.boundary.AuthorResponse;
 import nl.ivonet.boundary.BookResponse;
+import nl.ivonet.boundary.Publisher;
 import nl.ivonet.boundary.PublisherResponse;
 import nl.ivonet.error.IsbnInvalidApiKeyException;
 import org.junit.Before;
@@ -141,8 +142,23 @@ public class IsbndbTest {
         assertNotNull(response);
         assertThat(response.getIndexSearched(), is("publisher_name"));
         assertThat(response.getCurrentPage(), is(1));
+        final List<Publisher> data = response.getData();
+        assertThat(data.size(), is(10));
+        assertThat(data.get(0)
+                       .getPublisherId(), is("ac"));
+
+    }
+
+    /**
+     * READ CLASS JAVA_DOC WHEN TEST FAILS!
+     */
+    @Test
+    public void publisherById() throws Exception {
+        final PublisherResponse response = isbndb.publisherById("ac");
+        assertNotNull(response);
+        assertThat(response.getIndexSearched(), is("publisher_id"));
         assertThat(response.getData()
-                           .size(), is(10));
+                           .size(), is(1));
     }
 
 
