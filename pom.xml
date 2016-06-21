@@ -25,6 +25,8 @@
 
     <url>https://github.com/IvoNet/isbndb</url>
 
+    <name>isbndb</name>
+    <description>Java API to the isbndb.com json services</description>
     <organization>
         <name>IvoNet</name>
         <url>http://www.ivonet.nl</url>
