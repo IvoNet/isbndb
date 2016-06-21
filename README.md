@@ -1,6 +1,8 @@
 # Java API to the isbndb.com json services
 
-
+[isbndb](http://isbndb.com) is a nice resource for book / author metadata.
+This module gives easy to use methods for accessing the json api
+of this website.
 
 ## Prerequisites
 
@@ -8,6 +10,7 @@
 * maven
 * git
 * internet connection
+* isbndb api key (create an account and then a key)
 * good cheer :-)
 
 ## Usage
