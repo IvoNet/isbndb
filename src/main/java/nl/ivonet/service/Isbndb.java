@@ -161,7 +161,7 @@ public class Isbndb {
     /**
      * Searches for categories based on a search string.
      *
-     * @param name the subjects you are searching for.
+     * @param name the categories you are searching for.
      * @return {@link CategoryResponse}
      */
     public CategoryResponse categoriesByName(final String name) {
@@ -171,9 +171,9 @@ public class Isbndb {
     }
 
     /**
-     * Searches for categories based on a search string.
+     * Searches for category based on a search string.
      *
-     * @param id the subjects you are searching for.
+     * @param id the category you are searching for.
      * @return {@link CategoryResponse}
      */
     public CategoryResponse categoryById(final String id) {
