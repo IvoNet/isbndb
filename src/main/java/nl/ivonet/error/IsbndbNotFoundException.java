@@ -14,20 +14,13 @@
  * limitations under the License.
  */
 
-package nl.ivonet.boundary;
+package nl.ivonet.error;
 
 /**
  * @author Ivo Woltring
  */
-public class Index {
-    private String indexSearched;
-
-    public String getIndexSearched() {
-        return this.indexSearched;
+public class IsbndbNotFoundException extends IsbndbRuntimeException {
+    public IsbndbNotFoundException(final String error) {
+        super(error);
     }
-
-    public void setIndexSearched(final String indexSearched) {
-        this.indexSearched = indexSearched;
-    }
-
 }

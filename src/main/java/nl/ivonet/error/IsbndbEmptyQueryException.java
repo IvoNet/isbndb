@@ -14,14 +14,13 @@
  * limitations under the License.
  */
 
-package nl.ivonet.io;
+package nl.ivonet.error;
 
 /**
  * @author Ivo Woltring
  */
-public class WebResources {
-
-
-
-
+public class IsbndbEmptyQueryException extends IsbndbRuntimeException {
+    public IsbndbEmptyQueryException(final String error) {
+        super(error);
+    }
 }

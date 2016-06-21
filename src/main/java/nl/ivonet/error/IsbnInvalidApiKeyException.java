@@ -14,13 +14,13 @@
  * limitations under the License.
  */
 
-package nl.ivonet;
+package nl.ivonet.error;
 
 /**
  * @author Ivo Woltring
  */
-public class InvalidApiKeyException extends RuntimeException {
-    public InvalidApiKeyException(final String error) {
+public class IsbnInvalidApiKeyException extends IsbndbRuntimeException {
+    public IsbnInvalidApiKeyException(final String error) {
         super(error);
     }
 }

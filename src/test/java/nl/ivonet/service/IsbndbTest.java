@@ -16,30 +16,58 @@
 
 package nl.ivonet.service;
 
+import nl.ivonet.boundary.AuthorResponse;
+import nl.ivonet.error.IsbnInvalidApiKeyException;
 import org.junit.Before;
+import org.junit.Test;
+
+import static org.hamcrest.core.Is.is;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertThat;
 
 
 /**
+ * A couple of Tests will fail if you have not created an isbndb.properties file in
+ * src/test/resources with a 'api.key' property with valid api key.
+ * As these keys are personal you won't get one from me :-)
+ *
  * @author Ivo Woltring
  */
 public class IsbndbTest {
-    private Isbndbs isbndbs;
+    private Isbndb isbndb;
 
     @Before
     public void setUp() throws Exception {
-        this.isbndbs = new Isbndbs();
+        this.isbndb = new Isbndb();
     }
 
-//    @Test
-//    public void broadSearch() throws Exception {
-//        final String json = readTestResourceAsString("isbndb_author_search.json");
-//        final Gson gson = new GsonBuilder().setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
-// .create();
-//        final IsbndbSearch isbndbSearch = gson.fromJson(json, IsbndbSearch.class);
-//        System.out.println("isbndbSearch = " + isbndbSearch);
-//        final String s = gson.toJson(isbndbSearch);
-//        System.out.println("s = " + s);
-//    }
+    @Test(expected = IsbnInvalidApiKeyException.class)
+    public void exceptionInvalidKeyNull() throws Exception {
+        isbndb.setApiKey(null);
+        isbndb.authorById("foo");
+    }
 
+    @Test(expected = IsbnInvalidApiKeyException.class)
+    public void exceptionInvalidKeyEmpty() throws Exception {
+        isbndb.setApiKey("");
+        isbndb.authorById("foo");
+    }
 
+    /**
+     * READ CLASS JAVA_DOC WHEN TEST FAILS!
+     */
+    @Test
+    public void authorById() throws Exception {
+        final AuthorResponse response = isbndb.authorById("Ilona Andrews");
+        assertNotNull(response);
+        assertThat(response.getData()
+                           .get(0)
+                           .getFirstName(), is("Ilona"));
+        assertThat(response.getData()
+                           .get(0)
+                           .getLastName(), is("Andrews"));
+        assertThat(response.getIndexSearched(), is("author_id"));
+        assertThat(response.getData()
+                           .size(), is(1));
+    }
 }

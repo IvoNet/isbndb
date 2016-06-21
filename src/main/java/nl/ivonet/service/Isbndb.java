@@ -16,8 +16,12 @@
 
 package nl.ivonet.service;
 
-import nl.ivonet.InvalidApiKeyException;
+import com.google.gson.Gson;
 import nl.ivonet.boundary.AuthorResponse;
+import nl.ivonet.error.ErrorHandler;
+import nl.ivonet.error.IsbnInvalidApiKeyException;
+import nl.ivonet.io.WebResource;
+import nl.ivonet.parser.GsonFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -25,34 +29,65 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
+import static java.text.Normalizer.Form.NFD;
+import static java.text.Normalizer.normalize;
+
 /**
  * @author Ivo Woltring
  */
 public class Isbndb {
     private static final Logger LOG = LoggerFactory.getLogger(Isbndb.class);
+
+    private static final String API_URL = "http://isbndb.com/api/v2/json/%s/%s";
+    private static final String API_URL_SINGLE = API_URL + "/%s";
+    private static final String STATS_OPTION = "opt=keystats";
+    private static final String API_URL_SINGLE_STAT = API_URL_SINGLE + "?" + STATS_OPTION;
+    private final WebResource web;
+    private final Gson gson;
     private String apiKey;
 
-    private Isbndb() {
+    public Isbndb() {
         loadProperties();
+        web = WebResource.getInstance();
+        gson = GsonFactory.getInstance()
+                          .gson();
     }
 
+    /**
+     * The best results are gotten when presented as "firstname_lastname" or "firstname lastname".
+     * Or of course an authorId as obtained by another call :-)
+     * Diacritics will be removed.
+     */
     public AuthorResponse authorById(final String name) {
-        checkApi();
-        return null;
+        final String search = removeAccents(name.replace(" ", "_")
+                                                .toLowerCase());
+        return getAuthor(search);
+    }
+
+
+    private AuthorResponse getAuthor(final String search) {
+        return this.gson.fromJson(getJsonSingle("author", search), AuthorResponse.class);
     }
 
     public AuthorResponse authorsByName(final String name) {
-        checkApi();
         return null;
+    }
+
+    private String getJsonSingle(final String collection, final String search) {
+        checkApiKey();
+        final String json = web.getJson(String.format(API_URL_SINGLE_STAT, apiKey, collection, search));
+        gson.fromJson(json, ErrorHandler.class)
+            .handle();
+        return json;
     }
 
     public void setApiKey(final String apiKey) {
         this.apiKey = apiKey;
     }
 
-    private void checkApi() {
-        if (this.apiKey == null) {
-            throw new InvalidApiKeyException("No API key was set");
+    private void checkApiKey() {
+        if ((this.apiKey == null) || this.apiKey.isEmpty()) {
+            throw new IsbnInvalidApiKeyException("No API key was set");
         }
     }
 
@@ -63,20 +98,15 @@ public class Isbndb {
             if (is != null) {
                 final Properties props = new Properties();
                 props.load(is);
-                this.apiKey = props.getProperty("key")
+                this.apiKey = props.getProperty("api.key")
                                    .trim();
             }
         } catch (final IOException ignored) {
-            LOG.info("Unable to read isbndb.properties with a 'key' property.");
+            LOG.info("Unable to read isbndb.properties with a 'api.key' property.");
         }
     }
 
-    @SuppressWarnings("UtilityClass")
-    private static final class Instance {
-        static final Isbndb SINGLETON = new Isbndb();
-    }
-
-    public static Isbndb getInstance() {
-        return Instance.SINGLETON;
+    public static String removeAccents(final String text) {
+        return (text == null) ? null : normalize(text, NFD).replaceAll("\\p{InCombiningDiacriticalMarks}+", "");
     }
 }

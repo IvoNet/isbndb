@@ -18,8 +18,8 @@ package nl.ivonet.io;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
-import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.util.EntityUtils;
 
@@ -30,18 +30,19 @@ import java.io.IOException;
  */
 public class WebResource {
 
+    private final CloseableHttpClient client;
+
     private WebResource() {
+        client = HttpClientBuilder.create()
+                                  .build();
     }
 
-    private String getJson(final String url) {
-        final HttpClient client = HttpClientBuilder.create()
-                                                   .build();
+    public String getJson(final String url) {
         final HttpGet httpGet = new HttpGet(url);
         httpGet.addHeader("Accept", "application/json");
 
-        final HttpResponse response;
         try {
-            response = client.execute(httpGet);
+            final HttpResponse response = client.execute(httpGet);
             if (response.getStatusLine()
                         .getStatusCode() == HttpStatus.SC_OK) {
                 return EntityUtils.toString(response.getEntity(), "UTF-8");
