@@ -21,6 +21,8 @@ import nl.ivonet.boundary.AuthorResponse;
 import nl.ivonet.boundary.BookResponse;
 import nl.ivonet.boundary.Publisher;
 import nl.ivonet.boundary.PublisherResponse;
+import nl.ivonet.boundary.Subject;
+import nl.ivonet.boundary.SubjectResponse;
 import nl.ivonet.error.IsbnInvalidApiKeyException;
 import org.junit.Before;
 import org.junit.Test;
@@ -156,10 +158,33 @@ public class IsbndbTest {
     public void publisherById() throws Exception {
         final PublisherResponse response = isbndb.publisherById("ac");
         assertNotNull(response);
-        assertThat(response.getIndexSearched(), is("publisher_id"));
+        assertThat(response.getIndexSearched(), is("subject_name"));
         assertThat(response.getData()
                            .size(), is(1));
     }
 
+    /**
+     * READ CLASS JAVA_DOC WHEN TEST FAILS!
+     */
+    @Test
+    public void subjectsByName() throws Exception {
+        final SubjectResponse response = isbndb.subjectsByName("Fantasy");
+        assertNotNull(response);
+        assertThat(response.getIndexSearched(), is("subject_name"));
+        assertThat(response.getCurrentPage(), is(1));
+        final List<Subject> data = response.getData();
+        assertThat(data.size(), is(10));
+    }
 
+    /**
+     * READ CLASS JAVA_DOC WHEN TEST FAILS!
+     */
+    @Test
+    public void subjectById() throws Exception {
+        final SubjectResponse response = isbndb.subjectById("fantasies");
+        assertNotNull(response);
+        assertThat(response.getIndexSearched(), is("subject_id"));
+        final List<Subject> data = response.getData();
+        assertThat(data.size(), is(1));
+    }
 }

@@ -20,6 +20,7 @@ import com.google.gson.Gson;
 import nl.ivonet.boundary.AuthorResponse;
 import nl.ivonet.boundary.BookResponse;
 import nl.ivonet.boundary.PublisherResponse;
+import nl.ivonet.boundary.SubjectResponse;
 import nl.ivonet.error.ErrorHandler;
 import nl.ivonet.error.IsbnInvalidApiKeyException;
 import nl.ivonet.io.GsonFactory;
@@ -35,6 +36,8 @@ import static java.text.Normalizer.Form.NFD;
 import static java.text.Normalizer.normalize;
 
 /**
+ * The isbndb service.
+ *
  * @author Ivo Woltring
  */
 public class Isbndb {
@@ -128,6 +131,38 @@ public class Isbndb {
         final String search = removeAccents(name.replace(" ", "_")
                                                 .toLowerCase());
         return getPublisher(search);
+    }
+
+    /**
+     * Searches for subjects based on a search string.
+     *
+     * @param name the subjects you are searching for.
+     * @return {@link SubjectResponse}
+     */
+    public SubjectResponse subjectsByName(final String name) {
+        final String search = removeAccents(name.replace(" ", "+")
+                                                .toLowerCase());
+        return getSubjects(search);
+    }
+
+    /**
+     * Searches for subjects based on a search string.
+     *
+     * @param id the subjects you are searching for.
+     * @return {@link SubjectResponse}
+     */
+    public SubjectResponse subjectById(final String id) {
+        final String search = removeAccents(id.replace(" ", "_")
+                                              .toLowerCase());
+        return getSubject(search);
+    }
+
+    private SubjectResponse getSubjects(final String search) {
+        return this.gson.fromJson(getJsonCollection("subjects", search), SubjectResponse.class);
+    }
+
+    private SubjectResponse getSubject(final String search) {
+        return this.gson.fromJson(getJsonSingle("subject", search), SubjectResponse.class);
     }
 
     private PublisherResponse getPublishers(final String search) {
