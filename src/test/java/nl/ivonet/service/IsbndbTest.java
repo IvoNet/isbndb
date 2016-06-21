@@ -160,7 +160,7 @@ public class IsbndbTest {
     public void publisherById() throws Exception {
         final PublisherResponse response = isbndb.publisherById("ac");
         assertNotNull(response);
-        assertThat(response.getIndexSearched(), is("subject_name"));
+        assertThat(response.getIndexSearched(), is("publisher_id"));
         assertThat(response.getData()
                            .size(), is(1));
     }
@@ -201,8 +201,6 @@ public class IsbndbTest {
         assertThat(response.getCurrentPage(), is(1));
         final List<Category> data = response.getData();
         assertTrue(data.size() > 1);
-        System.out.println("data.get(0).getCategoryId() = " + data.get(0)
-                                                                  .getCategoryId());
     }
 
     /**
