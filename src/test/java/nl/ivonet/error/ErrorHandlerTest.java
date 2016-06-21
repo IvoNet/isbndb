@@ -17,7 +17,7 @@
 package nl.ivonet.error;
 
 import com.google.gson.Gson;
-import nl.ivonet.parser.GsonFactory;
+import nl.ivonet.io.GsonFactory;
 import nl.ivonet.utility.Utils;
 import org.junit.Before;
 import org.junit.Test;

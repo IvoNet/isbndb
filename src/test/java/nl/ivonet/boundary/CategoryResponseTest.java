@@ -17,7 +17,7 @@
 package nl.ivonet.boundary;
 
 import com.google.gson.Gson;
-import nl.ivonet.parser.GsonFactory;
+import nl.ivonet.io.GsonFactory;
 import org.junit.Before;
 import org.junit.Test;
 

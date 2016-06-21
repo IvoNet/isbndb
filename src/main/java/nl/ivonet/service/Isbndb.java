@@ -20,8 +20,8 @@ import com.google.gson.Gson;
 import nl.ivonet.boundary.AuthorResponse;
 import nl.ivonet.error.ErrorHandler;
 import nl.ivonet.error.IsbnInvalidApiKeyException;
+import nl.ivonet.io.GsonFactory;
 import nl.ivonet.io.WebResource;
-import nl.ivonet.parser.GsonFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
