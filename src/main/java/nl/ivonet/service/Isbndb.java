@@ -106,11 +106,18 @@ public class Isbndb {
         return getBooks(search);
     }
 
+    /**
+     * Searches for publishers based on a search string.
+     *
+     * @param name the publisher you are searching for.
+     * @return {@link PublisherResponse}
+     */
     public PublisherResponse publishersByName(final String name) {
         final String search = removeAccents(name.replace(" ", "+")
                                                 .toLowerCase());
         return getPublishers(search);
     }
+
 
     private PublisherResponse getPublishers(final String search) {
         return this.gson.fromJson(getJsonCollection("publishers", search), PublisherResponse.class);

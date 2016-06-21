@@ -19,9 +19,9 @@ package nl.ivonet.service;
 import nl.ivonet.boundary.Author;
 import nl.ivonet.boundary.AuthorResponse;
 import nl.ivonet.boundary.BookResponse;
+import nl.ivonet.boundary.PublisherResponse;
 import nl.ivonet.error.IsbnInvalidApiKeyException;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.List;
@@ -40,9 +40,12 @@ import static org.junit.Assert.assertTrue;
  * Note:
  * When testing with a valid key your member_use_granted will be hit a few times.
  *
+ * The test is set to @Ignore for production because a key is not standard provided
+ * Just remove the @Ignore and run tests.
+ *
  * @author Ivo Woltring
  */
-@Ignore
+//@Ignore
 public class IsbndbTest {
     private Isbndb isbndb;
 
@@ -127,6 +130,19 @@ public class IsbndbTest {
         assertTrue(response.getData()
                            .stream()
                            .anyMatch(book -> "0441018521".equals(book.getIsbn10())));
+    }
+
+    /**
+     * READ CLASS JAVA_DOC WHEN TEST FAILS!
+     */
+    @Test
+    public void publishersByName() throws Exception {
+        final PublisherResponse response = isbndb.publishersByName("Ace");
+        assertNotNull(response);
+        assertThat(response.getIndexSearched(), is("publisher_name"));
+        assertThat(response.getCurrentPage(), is(1));
+        assertThat(response.getData()
+                           .size(), is(10));
     }
 
 

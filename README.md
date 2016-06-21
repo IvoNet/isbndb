@@ -12,6 +12,18 @@
 
 ## Usage
 
+Just add this to your maven project:
+
+```xml
+<dependency>
+    <groupId>nl.ivonet</groupId>
+    <artifactId>isbndb</artifactId>
+    <version>0.1</version>
+</dependency>
+```
+
+or
+
 * clone this project
 * maven build this project
 * add the dependency to your project
