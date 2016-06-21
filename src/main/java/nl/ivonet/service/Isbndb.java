@@ -18,6 +18,8 @@ package nl.ivonet.service;
 
 import com.google.gson.Gson;
 import nl.ivonet.boundary.AuthorResponse;
+import nl.ivonet.boundary.BookResponse;
+import nl.ivonet.boundary.PublisherResponse;
 import nl.ivonet.error.ErrorHandler;
 import nl.ivonet.error.IsbnInvalidApiKeyException;
 import nl.ivonet.io.GsonFactory;
@@ -39,9 +41,9 @@ public class Isbndb {
     private static final Logger LOG = LoggerFactory.getLogger(Isbndb.class);
 
     private static final String API_URL = "http://isbndb.com/api/v2/json/%s/%s";
-    private static final String API_URL_SINGLE = API_URL + "/%s";
     private static final String STATS_OPTION = "opt=keystats";
-    private static final String API_URL_SINGLE_STAT = API_URL_SINGLE + "?" + STATS_OPTION;
+    private static final String API_URL_SINGLE = API_URL + "/%s?" + STATS_OPTION;
+    private static final String API_URL_COLLECTION = API_URL + "?q=%s&" + STATS_OPTION;
     private final WebResource web;
     private final Gson gson;
     private String apiKey;
@@ -54,28 +56,93 @@ public class Isbndb {
     }
 
     /**
-     * The best results are gotten when presented as "firstname_lastname" or "firstname lastname".
-     * Or of course an authorId as obtained by another call :-)
+     * The best results are gotten when presented as "firstname_lastname".
+     * If "firstname lastname" is given I will try to create an id from it.
+     * Or of course an authorId as obtained by another call will work best of all :-)
      * Diacritics will be removed.
+     *
+     * @param id the string representation of the name to search
+     * @return {@link AuthorResponse}
      */
-    public AuthorResponse authorById(final String name) {
-        final String search = removeAccents(name.replace(" ", "_")
+    public AuthorResponse authorById(final String id) {
+        final String search = removeAccents(id.replace(" ", "_")
                                                 .toLowerCase());
         return getAuthor(search);
     }
 
+    /**
+     * Broader search for authors based on a name.
+     *
+     * @param name String representation of the name to search for
+     * @return {@link AuthorResponse}
+     */
+    public AuthorResponse authorsByName(final String name) {
+        final String search = removeAccents(name.replace(" ", "+")
+                                                .toLowerCase());
+        return getAuthors(search);
+    }
+
+    /**
+     * Searches for a single book based on an isbn10, isbn13 of book_id.
+     *
+     * @param id isbn10 / isbn13 or string respresentation id of the book
+     * @return {@link BookResponse}
+     */
+    public BookResponse bookById(final String id) {
+        final String search = removeAccents(id.replace(" ", "_")
+                                              .toLowerCase());
+        return getBook(search);
+    }
+
+    /**
+     * Searches for a book collection based on a search string.
+     *
+     * @param name title or topic to search for
+     * @return {@link BookResponse}
+     */
+    public BookResponse booksByName(final String name) {
+        final String search = removeAccents(name.replace(" ", "+")
+                                                .toLowerCase());
+        return getBooks(search);
+    }
+
+    public PublisherResponse publishersByName(final String name) {
+        final String search = removeAccents(name.replace(" ", "+")
+                                                .toLowerCase());
+        return getPublishers(search);
+    }
+
+    private PublisherResponse getPublishers(final String search) {
+        return this.gson.fromJson(getJsonCollection("publishers", search), PublisherResponse.class);
+    }
+
+    private BookResponse getBooks(final String search) {
+        return this.gson.fromJson(getJsonCollection("books", search), BookResponse.class);
+    }
+
+    private BookResponse getBook(final String search) {
+        return this.gson.fromJson(getJsonSingle("book", search), BookResponse.class);
+    }
+
+    private AuthorResponse getAuthors(final String search) {
+        return this.gson.fromJson(getJsonCollection("authors", search), AuthorResponse.class);
+    }
 
     private AuthorResponse getAuthor(final String search) {
         return this.gson.fromJson(getJsonSingle("author", search), AuthorResponse.class);
     }
 
-    public AuthorResponse authorsByName(final String name) {
-        return null;
+    private String getJsonSingle(final String collection, final String search) {
+        return getJson(String.format(API_URL_SINGLE, apiKey, collection, search));
     }
 
-    private String getJsonSingle(final String collection, final String search) {
+    private String getJsonCollection(final String collection, final String search) {
+        return getJson(String.format(API_URL_COLLECTION, apiKey, collection, search));
+    }
+
+    private String getJson(final String url) {
         checkApiKey();
-        final String json = web.getJson(String.format(API_URL_SINGLE_STAT, apiKey, collection, search));
+        final String json = web.getJson(url);
         gson.fromJson(json, ErrorHandler.class)
             .handle();
         return json;

@@ -17,6 +17,17 @@
 * add the dependency to your project
 * start using the `Isbndb` service
 
+## Good to know
+
+By placing a file called `isbndb.properties` on the classpath containing
+a property called `api.key` with a valid Api key it will be picked up automatically
+when the Isbndb service is instantiated.
+
+e.g. `isbndb.properties`
+
+`api.key=VALIDKEY`
+
+You can of course override this by providing your own key programmatically.
 
 ## License
  
