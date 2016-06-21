@@ -19,6 +19,7 @@ package nl.ivonet.service;
 import com.google.gson.Gson;
 import nl.ivonet.boundary.AuthorResponse;
 import nl.ivonet.boundary.BookResponse;
+import nl.ivonet.boundary.CategoryResponse;
 import nl.ivonet.boundary.PublisherResponse;
 import nl.ivonet.boundary.SubjectResponse;
 import nl.ivonet.error.ErrorHandler;
@@ -155,6 +156,38 @@ public class Isbndb {
         final String search = removeAccents(id.replace(" ", "_")
                                               .toLowerCase());
         return getSubject(search);
+    }
+
+    /**
+     * Searches for categories based on a search string.
+     *
+     * @param name the subjects you are searching for.
+     * @return {@link CategoryResponse}
+     */
+    public CategoryResponse categoriesByName(final String name) {
+        final String search = removeAccents(name.replace(" ", "+")
+                                                .toLowerCase());
+        return getCategories(search);
+    }
+
+    /**
+     * Searches for categories based on a search string.
+     *
+     * @param id the subjects you are searching for.
+     * @return {@link CategoryResponse}
+     */
+    public CategoryResponse categoryById(final String id) {
+        final String search = removeAccents(id.replace(" ", ".")
+                                              .toLowerCase());
+        return getCategory(search);
+    }
+
+    private CategoryResponse getCategories(final String search) {
+        return this.gson.fromJson(getJsonCollection("categories", search), CategoryResponse.class);
+    }
+
+    private CategoryResponse getCategory(final String search) {
+        return this.gson.fromJson(getJsonSingle("category", search), CategoryResponse.class);
     }
 
     private SubjectResponse getSubjects(final String search) {

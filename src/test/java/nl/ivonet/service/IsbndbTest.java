@@ -19,6 +19,8 @@ package nl.ivonet.service;
 import nl.ivonet.boundary.Author;
 import nl.ivonet.boundary.AuthorResponse;
 import nl.ivonet.boundary.BookResponse;
+import nl.ivonet.boundary.Category;
+import nl.ivonet.boundary.CategoryResponse;
 import nl.ivonet.boundary.Publisher;
 import nl.ivonet.boundary.PublisherResponse;
 import nl.ivonet.boundary.Subject;
@@ -187,4 +189,32 @@ public class IsbndbTest {
         final List<Subject> data = response.getData();
         assertThat(data.size(), is(1));
     }
+
+    /**
+     * READ CLASS JAVA_DOC WHEN TEST FAILS!
+     */
+    @Test
+    public void categoriesByName() throws Exception {
+        final CategoryResponse response = isbndb.categoriesByName("programming");
+        assertNotNull(response);
+        assertThat(response.getIndexSearched(), is("category_name"));
+        assertThat(response.getCurrentPage(), is(1));
+        final List<Category> data = response.getData();
+        assertTrue(data.size() > 1);
+        System.out.println("data.get(0).getCategoryId() = " + data.get(0)
+                                                                  .getCategoryId());
+    }
+
+    /**
+     * READ CLASS JAVA_DOC WHEN TEST FAILS!
+     */
+    @Test
+    public void categoryById() throws Exception {
+        final CategoryResponse response = isbndb.categoryById("computers.programming");
+        assertNotNull(response);
+        assertThat(response.getIndexSearched(), is("category_id"));
+        final List<Category> data = response.getData();
+        assertThat(data.size(), is(1));
+    }
+
 }
