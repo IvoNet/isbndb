@@ -21,7 +21,7 @@ Just add this to your maven project:
 <dependency>
     <groupId>nl.ivonet</groupId>
     <artifactId>isbndb</artifactId>
-    <version>0.1</version>
+    <version>0.2</version>
 </dependency>
 ```
 
