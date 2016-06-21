@@ -19,7 +19,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>nl.ivonet</groupId>
     <artifactId>isbndb</artifactId>
-    <version>0.1</version>
+    <version>0.2-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <url>https://github.com/IvoNet/isbndb</url>
@@ -44,7 +44,7 @@
         <url>https://github.com/IvoNet/isbndb</url>
         <connection>scm:git:git@github.com:IvoNet/isbndb.git</connection>
         <developerConnection>scm:git:git@github.com:IvoNet/isbndb.git</developerConnection>
-        <tag>isbndb-0.1</tag>
+        <tag>HEAD</tag>
     </scm>
 
     <licenses>
