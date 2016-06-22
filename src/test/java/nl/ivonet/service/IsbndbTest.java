@@ -27,6 +27,7 @@ import nl.ivonet.boundary.Subject;
 import nl.ivonet.boundary.SubjectResponse;
 import nl.ivonet.error.IsbnInvalidApiKeyException;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.List;
@@ -50,7 +51,7 @@ import static org.junit.Assert.assertTrue;
  *
  * @author Ivo Woltring
  */
-//@Ignore
+@Ignore
 public class IsbndbTest {
     private Isbndb isbndb;
 

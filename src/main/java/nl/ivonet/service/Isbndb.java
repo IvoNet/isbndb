@@ -23,7 +23,6 @@ import nl.ivonet.boundary.CategoryResponse;
 import nl.ivonet.boundary.PublisherResponse;
 import nl.ivonet.boundary.SubjectResponse;
 import nl.ivonet.error.ErrorHandler;
-import nl.ivonet.error.IsbnInvalidApiKeyException;
 import nl.ivonet.io.GsonFactory;
 import nl.ivonet.io.WebResource;
 import nl.ivonet.service.EndpointBuilder.Builder;
@@ -35,7 +34,9 @@ import java.io.InputStream;
 import java.util.Properties;
 
 /**
- * The isbndb service.
+ * The isbndb module.
+ *
+ * First obtain an api key from isbndb.com :-) before use.
  *
  * @author Ivo Woltring
  */
@@ -258,6 +259,8 @@ public class Isbndb {
     /**
      * To set the isbndb.com api key with.
      *
+     * Be sure the key has been set before you start asking questions to the service.
+     *
      * @param apiKey an isbndb api key
      */
     public void setApiKey(final String apiKey) {
@@ -265,18 +268,12 @@ public class Isbndb {
     }
 
     private String getJson(final String url) {
-        checkApiKey();
         final String json = web.getJson(url);
         gson.fromJson(json, ErrorHandler.class)
             .handle();
         return json;
     }
 
-    private void checkApiKey() {
-        if ((this.apiKey == null) || this.apiKey.isEmpty()) {
-            throw new IsbnInvalidApiKeyException("No API key was set");
-        }
-    }
 
     private void loadProperties() {
         try {
