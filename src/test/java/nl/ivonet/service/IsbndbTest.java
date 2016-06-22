@@ -27,7 +27,6 @@ import nl.ivonet.boundary.Subject;
 import nl.ivonet.boundary.SubjectResponse;
 import nl.ivonet.error.IsbnInvalidApiKeyException;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.List;
@@ -51,7 +50,7 @@ import static org.junit.Assert.assertTrue;
  *
  * @author Ivo Woltring
  */
-@Ignore
+//@Ignore
 public class IsbndbTest {
     private Isbndb isbndb;
 
@@ -108,6 +107,17 @@ public class IsbndbTest {
      * READ CLASS JAVA_DOC WHEN TEST FAILS!
      */
     @Test
+    public void authorsByNamePage2() throws Exception {
+        final AuthorResponse response = isbndb.authorsByName("Ilona Andrews", 2);
+        assertNotNull(response);
+        assertThat(response.getIndexSearched(), is("author_name"));
+        assertThat(response.getCurrentPage(), is(2));
+    }
+
+    /**
+     * READ CLASS JAVA_DOC WHEN TEST FAILS!
+     */
+    @Test
     public void bookById() throws Exception {
         final BookResponse response = isbndb.bookById("0441018521");
         assertNotNull(response);
@@ -142,6 +152,17 @@ public class IsbndbTest {
      * READ CLASS JAVA_DOC WHEN TEST FAILS!
      */
     @Test
+    public void booksByNamePage2() throws Exception {
+        final BookResponse response = isbndb.booksByName("Magic Bleeds", 2);
+        assertNotNull(response);
+        assertThat(response.getIndexSearched(), is("title"));
+        assertThat(response.getCurrentPage(), is(2));
+    }
+
+    /**
+     * READ CLASS JAVA_DOC WHEN TEST FAILS!
+     */
+    @Test
     public void publishersByName() throws Exception {
         final PublisherResponse response = isbndb.publishersByName("Ace");
         assertNotNull(response);
@@ -152,6 +173,17 @@ public class IsbndbTest {
         assertThat(data.get(0)
                        .getPublisherId(), is("ac"));
 
+    }
+
+    /**
+     * READ CLASS JAVA_DOC WHEN TEST FAILS!
+     */
+    @Test
+    public void publishersByNamePage2() throws Exception {
+        final PublisherResponse response = isbndb.publishersByName("Ace", 2);
+        assertNotNull(response);
+        assertThat(response.getIndexSearched(), is("publisher_name"));
+        assertThat(response.getCurrentPage(), is(2));
     }
 
     /**
@@ -183,6 +215,17 @@ public class IsbndbTest {
      * READ CLASS JAVA_DOC WHEN TEST FAILS!
      */
     @Test
+    public void subjectsByNamePage2() throws Exception {
+        final SubjectResponse response = isbndb.subjectsByName("Fantasy", 2);
+        assertNotNull(response);
+        assertThat(response.getIndexSearched(), is("subject_name"));
+        assertThat(response.getCurrentPage(), is(2));
+    }
+
+    /**
+     * READ CLASS JAVA_DOC WHEN TEST FAILS!
+     */
+    @Test
     public void subjectById() throws Exception {
         final SubjectResponse response = isbndb.subjectById("fantasies");
         assertNotNull(response);
@@ -202,6 +245,17 @@ public class IsbndbTest {
         assertThat(response.getCurrentPage(), is(1));
         final List<Category> data = response.getData();
         assertTrue(data.size() > 1);
+    }
+
+    /**
+     * READ CLASS JAVA_DOC WHEN TEST FAILS!
+     */
+    @Test
+    public void categoriesByNamePage2() throws Exception {
+        final CategoryResponse response = isbndb.categoriesByName("programming", 2);
+        assertNotNull(response);
+        assertThat(response.getIndexSearched(), is("category_name"));
+        assertThat(response.getCurrentPage(), is(2));
     }
 
     /**

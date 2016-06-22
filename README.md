@@ -59,3 +59,10 @@ distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
+
+## Open Stories
+
+* As a User I WANT TO get a requested result page IN ORDER TO find the wanted result
+* As a User I WANT TO be notified when I exceed my daily quota IN ORDER TO don't make unnecessary requests
+* As a User I WANT TO IN ORDER TO
+* As a User I WANT TO IN ORDER TO

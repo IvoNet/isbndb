@@ -26,15 +26,13 @@ import nl.ivonet.error.ErrorHandler;
 import nl.ivonet.error.IsbnInvalidApiKeyException;
 import nl.ivonet.io.GsonFactory;
 import nl.ivonet.io.WebResource;
+import nl.ivonet.service.EndpointBuilder.Builder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
-
-import static java.text.Normalizer.Form.NFD;
-import static java.text.Normalizer.normalize;
 
 /**
  * The isbndb service.
@@ -43,11 +41,6 @@ import static java.text.Normalizer.normalize;
  */
 public class Isbndb {
     private static final Logger LOG = LoggerFactory.getLogger(Isbndb.class);
-
-    private static final String API_URL = "http://isbndb.com/api/v2/json/%s/%s";
-    private static final String STATS_OPTION = "opt=keystats";
-    private static final String API_URL_SINGLE = API_URL + "/%s?" + STATS_OPTION;
-    private static final String API_URL_COLLECTION = API_URL + "?q=%s&" + STATS_OPTION;
     private final WebResource web;
     private final Gson gson;
     private String apiKey;
@@ -87,9 +80,10 @@ public class Isbndb {
      * @return {@link AuthorResponse}
      */
     public AuthorResponse authorById(final String id) {
-        final String search = removeAccents(id.replace(" ", "_")
-                                              .toLowerCase());
-        return getAuthor(search);
+        return this.gson.fromJson(getJson(new Builder(apiKey).searchAuthor(id)
+                                                             .build()
+                                                             .endpoint()), AuthorResponse.class);
+
     }
 
     /**
@@ -99,9 +93,23 @@ public class Isbndb {
      * @return {@link AuthorResponse}
      */
     public AuthorResponse authorsByName(final String name) {
-        final String search = removeAccents(name.replace(" ", "+")
-                                                .toLowerCase());
-        return getAuthors(search);
+        return this.gson.fromJson(getJson(new Builder(apiKey).searchAuthors(name)
+                                                             .build()
+                                                             .endpoint()), AuthorResponse.class);
+    }
+
+    /**
+     * Broader search for authors based on a name.
+     *
+     * @param name String representation of the name to search for
+     * @param page the page number to get
+     * @return {@link AuthorResponse}
+     */
+    public AuthorResponse authorsByName(final String name, final int page) {
+        return this.gson.fromJson(getJson(new Builder(apiKey).searchAuthors(name)
+                                                             .page(page)
+                                                             .build()
+                                                             .endpoint()), AuthorResponse.class);
     }
 
     /**
@@ -111,9 +119,10 @@ public class Isbndb {
      * @return {@link BookResponse}
      */
     public BookResponse bookById(final String id) {
-        final String search = removeAccents(id.replace(" ", "_")
-                                              .toLowerCase());
-        return getBook(search);
+        return this.gson.fromJson(getJson(new Builder(apiKey).searchBook(id)
+                                                             .build()
+                                                             .endpoint()), BookResponse.class);
+
     }
 
     /**
@@ -123,21 +132,23 @@ public class Isbndb {
      * @return {@link BookResponse}
      */
     public BookResponse booksByName(final String name) {
-        final String search = removeAccents(name.replace(" ", "+")
-                                                .toLowerCase());
-        return getBooks(search);
+        return this.gson.fromJson(getJson(new Builder(apiKey).searchBooks(name)
+                                                             .build()
+                                                             .endpoint()), BookResponse.class);
     }
 
     /**
-     * Searches for publishers based on a search string.
+     * Searches for a book collection based on a search string.
      *
-     * @param name the publisher you are searching for.
-     * @return {@link PublisherResponse}
+     * @param name title or topic to search for
+     * @param page the page number to get
+     * @return {@link BookResponse}
      */
-    public PublisherResponse publishersByName(final String name) {
-        final String search = removeAccents(name.replace(" ", "+")
-                                                .toLowerCase());
-        return getPublishers(search);
+    public BookResponse booksByName(final String name, final int page) {
+        return this.gson.fromJson(getJson(new Builder(apiKey).searchBooks(name)
+                                                             .page(page)
+                                                             .build()
+                                                             .endpoint()), BookResponse.class);
     }
 
     /**
@@ -147,21 +158,35 @@ public class Isbndb {
      * @return {@link PublisherResponse}
      */
     public PublisherResponse publisherById(final String name) {
-        final String search = removeAccents(name.replace(" ", "_")
-                                                .toLowerCase());
-        return getPublisher(search);
+        return this.gson.fromJson(getJson(new Builder(apiKey).searchPublisher(name)
+                                                             .build()
+                                                             .endpoint()), PublisherResponse.class);
     }
 
     /**
-     * Searches for subjects based on a search string.
+     * Searches for publishers based on a search string.
      *
-     * @param name the subjects you are searching for.
-     * @return {@link SubjectResponse}
+     * @param name the publisher you are searching for.
+     * @return {@link PublisherResponse}
      */
-    public SubjectResponse subjectsByName(final String name) {
-        final String search = removeAccents(name.replace(" ", "+")
-                                                .toLowerCase());
-        return getSubjects(search);
+    public PublisherResponse publishersByName(final String name) {
+        return this.gson.fromJson(getJson(new Builder(apiKey).searchPublishers(name)
+                                                             .build()
+                                                             .endpoint()), PublisherResponse.class);
+    }
+
+    /**
+     * Searches for publishers based on a search string.
+     *
+     * @param name the publisher you are searching for.
+     * @param page the page number to get
+     * @return {@link PublisherResponse}
+     */
+    public PublisherResponse publishersByName(final String name, final int page) {
+        return this.gson.fromJson(getJson(new Builder(apiKey).searchPublishers(name)
+                                                             .page(page)
+                                                             .build()
+                                                             .endpoint()), PublisherResponse.class);
     }
 
     /**
@@ -171,21 +196,35 @@ public class Isbndb {
      * @return {@link SubjectResponse}
      */
     public SubjectResponse subjectById(final String id) {
-        final String search = removeAccents(id.replace(" ", "_")
-                                              .toLowerCase());
-        return getSubject(search);
+        return this.gson.fromJson(getJson(new Builder(apiKey).searchSubject(id)
+                                                             .build()
+                                                             .endpoint()), SubjectResponse.class);
     }
 
     /**
-     * Searches for categories based on a search string.
+     * Searches for subjects based on a search string.
      *
-     * @param name the categories you are searching for.
-     * @return {@link CategoryResponse}
+     * @param name the subjects you are searching for.
+     * @return {@link SubjectResponse}
      */
-    public CategoryResponse categoriesByName(final String name) {
-        final String search = removeAccents(name.replace(" ", "+")
-                                                .toLowerCase());
-        return getCategories(search);
+    public SubjectResponse subjectsByName(final String name) {
+        return this.gson.fromJson(getJson(new Builder(apiKey).searchSubjects(name)
+                                                             .build()
+                                                             .endpoint()), SubjectResponse.class);
+    }
+
+    /**
+     * Searches for subjects based on a search string.
+     *
+     * @param name the subjects you are searching for.
+     * @param page the page number to get
+     * @return {@link SubjectResponse}
+     */
+    public SubjectResponse subjectsByName(final String name, final int page) {
+        return this.gson.fromJson(getJson(new Builder(apiKey).searchSubjects(name)
+                                                             .page(page)
+                                                             .build()
+                                                             .endpoint()), SubjectResponse.class);
     }
 
     /**
@@ -195,9 +234,35 @@ public class Isbndb {
      * @return {@link CategoryResponse}
      */
     public CategoryResponse categoryById(final String id) {
-        final String search = removeAccents(id.replace(" ", ".")
-                                              .toLowerCase());
-        return getCategory(search);
+        return this.gson.fromJson(getJson(new Builder(apiKey).searchCategory(id)
+                                                             .build()
+                                                             .endpoint()), CategoryResponse.class);
+    }
+
+    /**
+     * Searches for categories based on a search string.
+     *
+     * @param name the categories you are searching for.
+     * @return {@link CategoryResponse}
+     */
+    public CategoryResponse categoriesByName(final String name) {
+        return this.gson.fromJson(getJson(new Builder(apiKey).searchCategories(name)
+                                                             .build()
+                                                             .endpoint()), CategoryResponse.class);
+    }
+
+    /**
+     * Searches for categories based on a search string.
+     *
+     * @param name the categories you are searching for.
+     * @param page the page number to get
+     * @return {@link CategoryResponse}
+     */
+    public CategoryResponse categoriesByName(final String name, final int page) {
+        return this.gson.fromJson(getJson(new Builder(apiKey).searchCategories(name)
+                                                             .page(page)
+                                                             .build()
+                                                             .endpoint()), CategoryResponse.class);
     }
 
     /**
@@ -207,54 +272,6 @@ public class Isbndb {
      */
     public void setApiKey(final String apiKey) {
         this.apiKey = apiKey;
-    }
-
-    private CategoryResponse getCategories(final String search) {
-        return this.gson.fromJson(getJsonCollection("categories", search), CategoryResponse.class);
-    }
-
-    private CategoryResponse getCategory(final String search) {
-        return this.gson.fromJson(getJsonSingle("category", search), CategoryResponse.class);
-    }
-
-    private SubjectResponse getSubjects(final String search) {
-        return this.gson.fromJson(getJsonCollection("subjects", search), SubjectResponse.class);
-    }
-
-    private SubjectResponse getSubject(final String search) {
-        return this.gson.fromJson(getJsonSingle("subject", search), SubjectResponse.class);
-    }
-
-    private PublisherResponse getPublishers(final String search) {
-        return this.gson.fromJson(getJsonCollection("publishers", search), PublisherResponse.class);
-    }
-
-    private PublisherResponse getPublisher(final String search) {
-        return this.gson.fromJson(getJsonSingle("publisher", search), PublisherResponse.class);
-    }
-
-    private BookResponse getBooks(final String search) {
-        return this.gson.fromJson(getJsonCollection("books", search), BookResponse.class);
-    }
-
-    private BookResponse getBook(final String search) {
-        return this.gson.fromJson(getJsonSingle("book", search), BookResponse.class);
-    }
-
-    private AuthorResponse getAuthors(final String search) {
-        return this.gson.fromJson(getJsonCollection("authors", search), AuthorResponse.class);
-    }
-
-    private AuthorResponse getAuthor(final String search) {
-        return this.gson.fromJson(getJsonSingle("author", search), AuthorResponse.class);
-    }
-
-    private String getJsonSingle(final String collection, final String search) {
-        return getJson(String.format(API_URL_SINGLE, apiKey, collection, search));
-    }
-
-    private String getJsonCollection(final String collection, final String search) {
-        return getJson(String.format(API_URL_COLLECTION, apiKey, collection, search));
     }
 
     private String getJson(final String url) {
@@ -284,9 +301,5 @@ public class Isbndb {
         } catch (final IOException ignored) {
             LOG.info("Unable to read isbndb.properties with a 'api.key' property.");
         }
-    }
-
-    public static String removeAccents(final String text) {
-        return (text == null) ? null : normalize(text, NFD).replaceAll("\\p{InCombiningDiacriticalMarks}+", "");
     }
 }
