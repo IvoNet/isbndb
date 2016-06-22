@@ -57,4 +57,11 @@ public class Publisher {
     public int getBookCount() {
         return this.bookCount;
     }
+
+    @Override
+    public String toString() {
+        return "Publisher{" + "publisherId='" + publisherId + '\'' + ", name='" + name + '\'' + ", nameLatin='"
+               + nameLatin + '\'' + ", location='" + location + '\'' + ", bookCount=" + bookCount + ", bookIds="
+               + bookIds + ", categoryIds=" + categoryIds + '}';
+    }
 }

@@ -73,4 +73,11 @@ public class Author {
         return this.dates;
     }
 
+    @Override
+    public String toString() {
+        return "Author{" + "authorId='" + authorId + '\'' + ", name='" + name + '\'' + ", latinName='" + latinName
+               + '\'' + ", lastName='" + lastName + '\'' + ", firstName='" + firstName + '\'' + ", bookCount="
+               + bookCount + ", categoryIds=" + categoryIds + ", subjectIds=" + subjectIds + ", bookIds=" + bookIds
+               + ", dates='" + dates + '\'' + '}';
+    }
 }

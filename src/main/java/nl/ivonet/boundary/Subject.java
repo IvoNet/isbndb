@@ -47,4 +47,10 @@ public class Subject {
     public List<String> getBookIds() {
         return this.bookIds;
     }
+
+    @Override
+    public String toString() {
+        return "Subject{" + "subjectId='" + subjectId + '\'' + ", name='" + name + '\'' + ", nameLatin='" + nameLatin
+               + '\'' + ", booksCount=" + booksCount + ", bookIds=" + bookIds + '}';
+    }
 }

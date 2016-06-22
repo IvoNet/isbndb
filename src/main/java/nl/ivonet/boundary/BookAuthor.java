@@ -30,4 +30,9 @@ public class BookAuthor {
     public String getName() {
         return this.name;
     }
+
+    @Override
+    public String toString() {
+        return "BookAuthor{" + "id='" + id + '\'' + ", name='" + name + '\'' + '}';
+    }
 }

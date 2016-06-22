@@ -57,4 +57,11 @@ public class Response<T> {
     public String getError() {
         return this.error;
     }
+
+    @Override
+    public String toString() {
+        return "Response{" + "indexSearched='" + indexSearched + '\'' + ", resultCount=" + resultCount + ", pageCount="
+               + pageCount + ", currentPage=" + currentPage + ", data=" + data + ", keystats=" + keystats + ", error='"
+               + error + '\'' + '}';
+    }
 }

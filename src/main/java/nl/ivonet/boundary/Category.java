@@ -52,4 +52,11 @@ public class Category {
     public List<String> getChildIds() {
         return this.childIds;
     }
+
+    @Override
+    public String toString() {
+        return "Category{" + "categoryId='" + categoryId + '\'' + ", name='" + name + '\'' + ", nameLatin='" + nameLatin
+               + '\'' + ", summary='" + summary + '\'' + ", parentId='" + parentId + '\'' + ", childIds=" + childIds
+               + '}';
+    }
 }

@@ -61,4 +61,11 @@ public class Keystats {
         return this.memberUseGranted;
     }
 
+    @Override
+    public String toString() {
+        return "Keystats{" + "keyUseRequests=" + keyUseRequests + ", keyLimit='" + keyLimit + '\'' + ", freeUseLimit="
+               + freeUseLimit + ", memberUseRequests=" + memberUseRequests + ", keyId='" + keyId + '\''
+               + ", dailyMaxPayUses=" + dailyMaxPayUses + ", keyUseGranted=" + keyUseGranted + ", memberUseGranted="
+               + memberUseGranted + '}';
+    }
 }

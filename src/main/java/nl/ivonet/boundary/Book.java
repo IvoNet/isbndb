@@ -128,4 +128,16 @@ public class Book {
         return this.authorData;
     }
 
+    @Override
+    public String toString() {
+        return "Book{" + "bookId='" + bookId + '\'' + ", summary='" + summary + '\'' + ", title='" + title + '\''
+               + ", titleLong='" + titleLong + '\'' + ", titleLatin='" + titleLatin + '\'' + ", isbn13='" + isbn13
+               + '\'' + ", isbn10='" + isbn10 + '\'' + ", editionInfo='" + editionInfo + '\'' + ", marcEncLevel='"
+               + marcEncLevel + '\'' + ", urlsText='" + urlsText + '\'' + ", publisherId='" + publisherId + '\''
+               + ", publisherName='" + publisherName + '\'' + ", publisherText='" + publisherText + '\''
+               + ", language='" + language + '\'' + ", notes='" + notes + '\'' + ", lccNumber='" + lccNumber + '\''
+               + ", physicalDescriptionText='" + physicalDescriptionText + '\'' + ", deweyDecimal='" + deweyDecimal
+               + '\'' + ", deweyNormal='" + deweyNormal + '\'' + ", subject_ids=" + subject_ids + ", authorData="
+               + authorData + '}';
+    }
 }
