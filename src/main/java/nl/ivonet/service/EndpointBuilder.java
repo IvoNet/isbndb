@@ -24,7 +24,7 @@ import static java.text.Normalizer.normalize;
 /**
  * @author Ivo Woltring
  */
-public final class EndpointBuilder {
+final class EndpointBuilder {
 
 
     private final String endpoint;
@@ -56,7 +56,7 @@ public final class EndpointBuilder {
     /**
      * The Builder for {@link EndpointBuilder}.
      */
-    public static class Builder {
+    static class Builder {
         private static final String API_URL = "http://isbndb.com/api/v2/json/%s/%s";
         private static final String STATS_OPTION = "opt=keystats";
         private static final String API_URL_SINGLE = API_URL + "/%s?" + STATS_OPTION;
