@@ -52,11 +52,29 @@ public class Isbndb {
     private final Gson gson;
     private String apiKey;
 
+    /**
+     * Constructs a default Isbndb service.
+     *
+     * During construction a file called "isbndb.properties" is searched for on the
+     * classpath. If found it will look foor a key "api.key" in that property file.
+     * If found that will be the key it will use to do the service calls to isbndb.com
+     */
     public Isbndb() {
         loadProperties();
         web = WebResource.getInstance();
         gson = GsonFactory.getInstance()
                           .gson();
+    }
+
+    /**
+     * Same as the default constructor but with the exception of overriding the property file key
+     * by providing it as a constructur argument.
+     *
+     * @param apiKey the isbndb api key
+     */
+    public Isbndb(final String apiKey) {
+        this();
+        this.apiKey = apiKey;
     }
 
     /**
@@ -182,6 +200,15 @@ public class Isbndb {
         return getCategory(search);
     }
 
+    /**
+     * To set the isbndb.com api key with.
+     *
+     * @param apiKey an isbndb api key
+     */
+    public void setApiKey(final String apiKey) {
+        this.apiKey = apiKey;
+    }
+
     private CategoryResponse getCategories(final String search) {
         return this.gson.fromJson(getJsonCollection("categories", search), CategoryResponse.class);
     }
@@ -236,10 +263,6 @@ public class Isbndb {
         gson.fromJson(json, ErrorHandler.class)
             .handle();
         return json;
-    }
-
-    public void setApiKey(final String apiKey) {
-        this.apiKey = apiKey;
     }
 
     private void checkApiKey() {
