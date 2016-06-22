@@ -93,9 +93,7 @@ public class Isbndb {
      * @return {@link AuthorResponse}
      */
     public AuthorResponse authorsByName(final String name) {
-        return this.gson.fromJson(getJson(new Builder(apiKey).searchAuthors(name)
-                                                             .build()
-                                                             .endpoint()), AuthorResponse.class);
+        return authorsByName(name, 0);
     }
 
     /**
@@ -132,9 +130,7 @@ public class Isbndb {
      * @return {@link BookResponse}
      */
     public BookResponse booksByName(final String name) {
-        return this.gson.fromJson(getJson(new Builder(apiKey).searchBooks(name)
-                                                             .build()
-                                                             .endpoint()), BookResponse.class);
+        return booksByName(name, 0);
     }
 
     /**
@@ -170,9 +166,7 @@ public class Isbndb {
      * @return {@link PublisherResponse}
      */
     public PublisherResponse publishersByName(final String name) {
-        return this.gson.fromJson(getJson(new Builder(apiKey).searchPublishers(name)
-                                                             .build()
-                                                             .endpoint()), PublisherResponse.class);
+        return publishersByName(name, 0);
     }
 
     /**
@@ -208,9 +202,7 @@ public class Isbndb {
      * @return {@link SubjectResponse}
      */
     public SubjectResponse subjectsByName(final String name) {
-        return this.gson.fromJson(getJson(new Builder(apiKey).searchSubjects(name)
-                                                             .build()
-                                                             .endpoint()), SubjectResponse.class);
+        return subjectsByName(name, 0);
     }
 
     /**
@@ -246,9 +238,7 @@ public class Isbndb {
      * @return {@link CategoryResponse}
      */
     public CategoryResponse categoriesByName(final String name) {
-        return this.gson.fromJson(getJson(new Builder(apiKey).searchCategories(name)
-                                                             .build()
-                                                             .endpoint()), CategoryResponse.class);
+        return categoriesByName(name, 0);
     }
 
     /**
