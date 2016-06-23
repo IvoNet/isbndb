@@ -21,7 +21,7 @@ Just add this to your maven project:
 <dependency>
     <groupId>nl.ivonet</groupId>
     <artifactId>isbndb</artifactId>
-    <version>0.2</version>
+    <version>0.3</version>
 </dependency>
 ```
 
@@ -63,3 +63,5 @@ limitations under the License.
 ## Open Stories
 
 * As a User I WANT TO be notified when I exceed my daily quota IN ORDER TO don't make unnecessary requests
+  and don't get feature envy by having to implement it in the using applciation
+

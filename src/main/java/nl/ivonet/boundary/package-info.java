@@ -22,6 +22,9 @@
  * The naming strategy is to camelcase all the underscored names and vice versa.
  * e.g. index_searched becomes java name indexSearched
  *
+ * The reason why there are no setters or constructors defined is that gson the parser used
+ * to process these objects uses reflection to fill the model and after that they should be readonly.
+ *
  * @author Ivo Woltring
  */
 package nl.ivonet.boundary;
