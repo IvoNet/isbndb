@@ -81,9 +81,12 @@ public class Isbndb {
      * @return {@link AuthorResponse}
      */
     public AuthorResponse authorById(final String id) {
-        return this.gson.fromJson(getJson(new Builder(apiKey).searchAuthor(id)
-                                                             .build()
-                                                             .endpoint()), AuthorResponse.class);
+        final String json = getJson(new Builder(apiKey).searchAuthor(id)
+                                                       .build()
+                                                       .endpoint());
+        final AuthorResponse response = this.gson.fromJson(json, AuthorResponse.class);
+        response.setJson(json);
+        return response;
 
     }
 
@@ -105,10 +108,13 @@ public class Isbndb {
      * @return {@link AuthorResponse}
      */
     public AuthorResponse authorsByName(final String name, final int page) {
-        return this.gson.fromJson(getJson(new Builder(apiKey).searchAuthors(name)
-                                                             .page(page)
-                                                             .build()
-                                                             .endpoint()), AuthorResponse.class);
+        final String json = getJson(new Builder(apiKey).searchAuthors(name)
+                                                       .page(page)
+                                                       .build()
+                                                       .endpoint());
+        final AuthorResponse response = this.gson.fromJson(json, AuthorResponse.class);
+        response.setJson(json);
+        return response;
     }
 
     /**
@@ -118,9 +124,12 @@ public class Isbndb {
      * @return {@link BookResponse}
      */
     public BookResponse bookById(final String id) {
-        return this.gson.fromJson(getJson(new Builder(apiKey).searchBook(id)
-                                                             .build()
-                                                             .endpoint()), BookResponse.class);
+        final String json = getJson(new Builder(apiKey).searchBook(id)
+                                                       .build()
+                                                       .endpoint());
+        final BookResponse response = this.gson.fromJson(json, BookResponse.class);
+        response.setJson(json);
+        return response;
 
     }
 
@@ -142,10 +151,13 @@ public class Isbndb {
      * @return {@link BookResponse}
      */
     public BookResponse booksByName(final String name, final int page) {
-        return this.gson.fromJson(getJson(new Builder(apiKey).searchBooks(name)
-                                                             .page(page)
-                                                             .build()
-                                                             .endpoint()), BookResponse.class);
+        final String json = getJson(new Builder(apiKey).searchBooks(name)
+                                                       .page(page)
+                                                       .build()
+                                                       .endpoint());
+        final BookResponse response = this.gson.fromJson(json, BookResponse.class);
+        response.setJson(json);
+        return response;
     }
 
     /**
@@ -155,9 +167,12 @@ public class Isbndb {
      * @return {@link PublisherResponse}
      */
     public PublisherResponse publisherById(final String name) {
-        return this.gson.fromJson(getJson(new Builder(apiKey).searchPublisher(name)
-                                                             .build()
-                                                             .endpoint()), PublisherResponse.class);
+        final String json = getJson(new Builder(apiKey).searchPublisher(name)
+                                                       .build()
+                                                       .endpoint());
+        final PublisherResponse response = this.gson.fromJson(json, PublisherResponse.class);
+        response.setJson(json);
+        return response;
     }
 
     /**
@@ -178,10 +193,13 @@ public class Isbndb {
      * @return {@link PublisherResponse}
      */
     public PublisherResponse publishersByName(final String name, final int page) {
-        return this.gson.fromJson(getJson(new Builder(apiKey).searchPublishers(name)
-                                                             .page(page)
-                                                             .build()
-                                                             .endpoint()), PublisherResponse.class);
+        final String json = getJson(new Builder(apiKey).searchPublishers(name)
+                                                       .page(page)
+                                                       .build()
+                                                       .endpoint());
+        final PublisherResponse response = this.gson.fromJson(json, PublisherResponse.class);
+        response.setJson(json);
+        return response;
     }
 
     /**
@@ -191,9 +209,12 @@ public class Isbndb {
      * @return {@link SubjectResponse}
      */
     public SubjectResponse subjectById(final String id) {
-        return this.gson.fromJson(getJson(new Builder(apiKey).searchSubject(id)
-                                                             .build()
-                                                             .endpoint()), SubjectResponse.class);
+        final String json = getJson(new Builder(apiKey).searchSubject(id)
+                                                       .build()
+                                                       .endpoint());
+        final SubjectResponse response = this.gson.fromJson(json, SubjectResponse.class);
+        response.setJson(json);
+        return response;
     }
 
     /**
@@ -214,10 +235,13 @@ public class Isbndb {
      * @return {@link SubjectResponse}
      */
     public SubjectResponse subjectsByName(final String name, final int page) {
-        return this.gson.fromJson(getJson(new Builder(apiKey).searchSubjects(name)
-                                                             .page(page)
-                                                             .build()
-                                                             .endpoint()), SubjectResponse.class);
+        final String json = getJson(new Builder(apiKey).searchSubjects(name)
+                                                       .page(page)
+                                                       .build()
+                                                       .endpoint());
+        final SubjectResponse response = this.gson.fromJson(json, SubjectResponse.class);
+        response.setJson(json);
+        return response;
     }
 
     /**
@@ -227,9 +251,12 @@ public class Isbndb {
      * @return {@link CategoryResponse}
      */
     public CategoryResponse categoryById(final String id) {
-        return this.gson.fromJson(getJson(new Builder(apiKey).searchCategory(id)
-                                                             .build()
-                                                             .endpoint()), CategoryResponse.class);
+        final String json = getJson(new Builder(apiKey).searchCategory(id)
+                                                       .build()
+                                                       .endpoint());
+        final CategoryResponse response = this.gson.fromJson(json, CategoryResponse.class);
+        response.setJson(json);
+        return response;
     }
 
     /**
@@ -250,10 +277,13 @@ public class Isbndb {
      * @return {@link CategoryResponse}
      */
     public CategoryResponse categoriesByName(final String name, final int page) {
-        return this.gson.fromJson(getJson(new Builder(apiKey).searchCategories(name)
-                                                             .page(page)
-                                                             .build()
-                                                             .endpoint()), CategoryResponse.class);
+        final String json = getJson(new Builder(apiKey).searchCategories(name)
+                                                       .page(page)
+                                                       .build()
+                                                       .endpoint());
+        final CategoryResponse response = this.gson.fromJson(json, CategoryResponse.class);
+        response.setJson(json);
+        return response;
     }
 
     /**

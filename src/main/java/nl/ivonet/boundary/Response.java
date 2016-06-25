@@ -29,6 +29,7 @@ public class Response<T> {
     private List<T> data;
     private Keystats keystats;
     private String error;
+    private String json;
 
     public String getIndexSearched() {
         return this.indexSearched;
@@ -56,6 +57,14 @@ public class Response<T> {
 
     public String getError() {
         return this.error;
+    }
+
+    public String getJson() {
+        return json;
+    }
+
+    public void setJson(final String json) {
+        this.json = json;
     }
 
     @Override

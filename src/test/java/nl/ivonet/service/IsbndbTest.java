@@ -88,6 +88,7 @@ public class IsbndbTest {
         assertThat(response.getIndexSearched(), is("author_id"));
         assertThat(response.getData()
                            .size(), is(1));
+        assertNotNull(response.getJson());
     }
 
     /**
@@ -102,6 +103,7 @@ public class IsbndbTest {
         assertThat(data.size(), is(10));
         assertTrue(data.stream()
                        .anyMatch(author -> "Andrew".equals(author.getLastName())));
+        assertNotNull(response.getJson());
     }
 
     /**
@@ -113,6 +115,7 @@ public class IsbndbTest {
         assertNotNull(response);
         assertThat(response.getIndexSearched(), is("author_name"));
         assertThat(response.getCurrentPage(), is(2));
+        assertNotNull(response.getJson());
     }
 
     /**
@@ -131,6 +134,7 @@ public class IsbndbTest {
         assertThat(response.getData()
                            .get(0)
                            .getIsbn13(), is("9780441018529"));
+        assertNotNull(response.getJson());
     }
 
     /**
@@ -147,6 +151,7 @@ public class IsbndbTest {
         assertTrue(response.getData()
                            .stream()
                            .anyMatch(book -> "0441018521".equals(book.getIsbn10())));
+        assertNotNull(response.getJson());
     }
 
     /**
@@ -158,6 +163,7 @@ public class IsbndbTest {
         assertNotNull(response);
         assertThat(response.getIndexSearched(), is("title"));
         assertThat(response.getCurrentPage(), is(2));
+        assertNotNull(response.getJson());
     }
 
     /**
@@ -174,6 +180,7 @@ public class IsbndbTest {
         assertThat(data.get(0)
                        .getPublisherId(), is("ac"));
 
+        assertNotNull(response.getJson());
     }
 
     /**
@@ -185,6 +192,7 @@ public class IsbndbTest {
         assertNotNull(response);
         assertThat(response.getIndexSearched(), is("publisher_name"));
         assertThat(response.getCurrentPage(), is(2));
+        assertNotNull(response.getJson());
     }
 
     /**
@@ -197,6 +205,7 @@ public class IsbndbTest {
         assertThat(response.getIndexSearched(), is("publisher_id"));
         assertThat(response.getData()
                            .size(), is(1));
+        assertNotNull(response.getJson());
     }
 
     /**
@@ -210,6 +219,7 @@ public class IsbndbTest {
         assertThat(response.getCurrentPage(), is(1));
         final List<Subject> data = response.getData();
         assertThat(data.size(), is(10));
+        assertNotNull(response.getJson());
     }
 
     /**
@@ -221,6 +231,7 @@ public class IsbndbTest {
         assertNotNull(response);
         assertThat(response.getIndexSearched(), is("subject_name"));
         assertThat(response.getCurrentPage(), is(2));
+        assertNotNull(response.getJson());
     }
 
     /**
@@ -233,6 +244,7 @@ public class IsbndbTest {
         assertThat(response.getIndexSearched(), is("subject_id"));
         final List<Subject> data = response.getData();
         assertThat(data.size(), is(1));
+        assertNotNull(response.getJson());
     }
 
     /**
@@ -246,6 +258,7 @@ public class IsbndbTest {
         assertThat(response.getCurrentPage(), is(1));
         final List<Category> data = response.getData();
         assertTrue(data.size() > 1);
+        assertNotNull(response.getJson());
     }
 
     /**
@@ -257,6 +270,7 @@ public class IsbndbTest {
         assertNotNull(response);
         assertThat(response.getIndexSearched(), is("category_name"));
         assertThat(response.getCurrentPage(), is(2));
+        assertNotNull(response.getJson());
     }
 
     /**
@@ -269,6 +283,7 @@ public class IsbndbTest {
         assertThat(response.getIndexSearched(), is("category_id"));
         final List<Category> data = response.getData();
         assertThat(data.size(), is(1));
+        assertNotNull(response.getJson());
     }
 
 }
