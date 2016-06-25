@@ -67,6 +67,10 @@ public class Response<T> {
         this.json = json;
     }
 
+    public boolean hasError() {
+        return (error != null) && !error.isEmpty();
+    }
+
     @Override
     public String toString() {
         return "Response{" + "indexSearched='" + indexSearched + '\'' + ", resultCount=" + resultCount + ", pageCount="

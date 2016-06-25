@@ -45,6 +45,7 @@ public class Isbndb {
     private final WebResource web;
     private final Gson gson;
     private String apiKey;
+    private boolean errorhandling;
 
     /**
      * Constructs a default Isbndb service.
@@ -55,6 +56,7 @@ public class Isbndb {
      */
     public Isbndb() {
         loadProperties();
+        errorhandling = true;
         web = WebResource.getInstance();
         gson = GsonFactory.getInstance()
                           .gson();
@@ -297,13 +299,37 @@ public class Isbndb {
         this.apiKey = apiKey;
     }
 
-    private String getJson(final String url) {
-        final String json = web.getJson(url);
-        gson.fromJson(json, ErrorHandler.class)
-            .handle();
-        return json;
+    /**
+     * Disables the throwing of runtime exceptions when
+     * functional errors occur.
+     *
+     * This leaves the receiver to interpret the errors for
+     * themselves.
+     *
+     * The default is that errorhandling is enabled.
+     */
+    public void disableErrorhandling() {
+        this.errorhandling = false;
     }
 
+    /**
+     * Disables the throwing of runtime exceptions when
+     * functional errors occur.
+     *
+     * This is default enabled.
+     */
+    public void enableErrorhandling() {
+        this.errorhandling = true;
+    }
+
+    private String getJson(final String url) {
+        final String json = web.getJson(url);
+        if (errorhandling) {
+            gson.fromJson(json, ErrorHandler.class)
+                .handle();
+        }
+        return json;
+    }
 
     private void loadProperties() {
         try {

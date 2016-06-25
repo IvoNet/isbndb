@@ -61,11 +61,25 @@ public class Keystats {
         return this.memberUseGranted;
     }
 
+    /**
+     * @return true if total member limit has been reached
+     */
+    public boolean memberLimitReached() {
+        return (freeUseLimit - memberUseGranted) == 0;
+    }
+
+    /**
+     * @return true if current key limit has been reached.
+     */
+    public boolean keyLimitReached() {
+        return (freeUseLimit - keyUseGranted) == 0;
+    }
+
+
     @Override
     public String toString() {
         return "Keystats{" + "keyUseRequests=" + keyUseRequests + ", keyLimit='" + keyLimit + '\'' + ", freeUseLimit="
-               + freeUseLimit + ", memberUseRequests=" + memberUseRequests + ", keyId='" + keyId + '\''
-               + ", dailyMaxPayUses=" + dailyMaxPayUses + ", keyUseGranted=" + keyUseGranted + ", memberUseGranted="
-               + memberUseGranted + '}';
+               + freeUseLimit + ", memberUseRequests=" + memberUseRequests + ", dailyMaxPayUses=" + dailyMaxPayUses
+               + ", keyUseGranted=" + keyUseGranted + ", memberUseGranted=" + memberUseGranted + '}';
     }
 }
