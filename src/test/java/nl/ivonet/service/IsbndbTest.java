@@ -52,6 +52,7 @@ import static org.junit.Assert.assertTrue;
  * @author Ivo Woltring
  */
 @Ignore
+//only enable this test when changes have been done to its corresponding class. To prevent unnecessary api calls.
 public class IsbndbTest {
     private Isbndb isbndb;
 
