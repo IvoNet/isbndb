@@ -86,29 +86,11 @@ public class Isbndb {
      * @return {@link AuthorResponse}
      */
     public AuthorResponse authorById(final String id) {
-        final String json = getJson(new Builder(apiKey).searchAuthor(encodeId(id))
+        final String json = getJson(new Builder(apiKey).searchAuthor(id)
                                                        .build()
                                                        .endpoint());
         return getAuthorResponse(json);
 
-    }
-
-    private String encodeId(final String value) {
-        final String input = value.replace("-", "")
-                                  .replace(" ", "")
-                                  .replace(".", "")
-                                  .replace("[", "")
-                                  .replace("]", "")
-                                  .replace("ISBN", "");
-        return encode(input);
-    }
-
-    private String encode(final String value) {
-        try {
-            return URLEncoder.encode(value, "UTF-8");
-        } catch (final UnsupportedEncodingException e) {
-            throw new IsbndbRuntimeException(e.getMessage(), e);
-        }
     }
 
     /**
@@ -149,11 +131,36 @@ public class Isbndb {
      * @return {@link BookResponse}
      */
     public BookResponse bookById(final String id) {
-        final String json = getJson(new Builder(apiKey).searchBook(id)
+        final String json = getJson(new Builder(apiKey).searchBook(encodeId(id))
                                                        .build()
                                                        .endpoint());
         return getBookResponse(json);
+    }
 
+    private String encodeId(final String value) {
+        String input = value.replace("-", "")
+                            .replace(" ", "")
+                            .replace(".", "")
+                            .replace("[", "")
+                            .replace("]", "")
+                            .replace("ISBN", "");
+
+        if (multipleIds(input)) {
+            input = input.split("/")[0];
+        }
+        return encode(input);
+    }
+
+    private boolean multipleIds(final String input) {
+        return input.contains("/");
+    }
+
+    private String encode(final String value) {
+        try {
+            return URLEncoder.encode(value, "UTF-8");
+        } catch (final UnsupportedEncodingException e) {
+            throw new IsbndbRuntimeException(e.getMessage(), e);
+        }
     }
 
     public BookResponse getBookResponse(final String json) {
