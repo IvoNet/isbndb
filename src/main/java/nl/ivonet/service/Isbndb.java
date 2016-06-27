@@ -23,6 +23,7 @@ import nl.ivonet.boundary.CategoryResponse;
 import nl.ivonet.boundary.PublisherResponse;
 import nl.ivonet.boundary.SubjectResponse;
 import nl.ivonet.error.ErrorHandler;
+import nl.ivonet.error.IsbndbRuntimeException;
 import nl.ivonet.io.GsonFactory;
 import nl.ivonet.io.WebResource;
 import nl.ivonet.service.EndpointBuilder.Builder;
@@ -31,6 +32,8 @@ import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.Properties;
 
 /**
@@ -83,11 +86,29 @@ public class Isbndb {
      * @return {@link AuthorResponse}
      */
     public AuthorResponse authorById(final String id) {
-        final String json = getJson(new Builder(apiKey).searchAuthor(id)
+        final String json = getJson(new Builder(apiKey).searchAuthor(encodeId(id))
                                                        .build()
                                                        .endpoint());
         return getAuthorResponse(json);
 
+    }
+
+    private String encodeId(final String value) {
+        final String input = value.replace("-", "")
+                                  .replace(" ", "")
+                                  .replace(".", "")
+                                  .replace("[", "")
+                                  .replace("]", "")
+                                  .replace("ISBN", "");
+        return encode(input);
+    }
+
+    private String encode(final String value) {
+        try {
+            return URLEncoder.encode(value, "UTF-8");
+        } catch (final UnsupportedEncodingException e) {
+            throw new IsbndbRuntimeException(e.getMessage(), e);
+        }
     }
 
     /**
@@ -116,7 +137,7 @@ public class Isbndb {
     }
 
     public AuthorResponse getAuthorResponse(final String json) {
-        final AuthorResponse response = this.gson.fromJson(neverNull(json), AuthorResponse.class);
+        final AuthorResponse response = this.gson.fromJson(json, AuthorResponse.class);
         response.setJson(json);
         return response;
     }
@@ -136,7 +157,7 @@ public class Isbndb {
     }
 
     public BookResponse getBookResponse(final String json) {
-        final BookResponse response = this.gson.fromJson(neverNull(json), BookResponse.class);
+        final BookResponse response = this.gson.fromJson(json, BookResponse.class);
         response.setJson(json);
         return response;
     }
@@ -180,7 +201,7 @@ public class Isbndb {
     }
 
     public PublisherResponse getPublisherResponse(final String json) {
-        final PublisherResponse response = this.gson.fromJson(neverNull(json), PublisherResponse.class);
+        final PublisherResponse response = this.gson.fromJson(json, PublisherResponse.class);
         response.setJson(json);
         return response;
     }
@@ -224,7 +245,7 @@ public class Isbndb {
     }
 
     public SubjectResponse getSubjectResponse(final String json) {
-        final SubjectResponse response = this.gson.fromJson(neverNull(json), SubjectResponse.class);
+        final SubjectResponse response = this.gson.fromJson(json, SubjectResponse.class);
         response.setJson(json);
         return response;
     }
@@ -268,13 +289,9 @@ public class Isbndb {
     }
 
     public CategoryResponse getCategoryResponse(final String json) {
-        final CategoryResponse response = this.gson.fromJson(neverNull(json), CategoryResponse.class);
+        final CategoryResponse response = this.gson.fromJson(json, CategoryResponse.class);
         response.setJson(json);
         return response;
-    }
-
-    public String neverNull(final String json) {
-        return (json != null) ? json : "{}";
     }
 
     /**
@@ -337,12 +354,16 @@ public class Isbndb {
     }
 
     private String getJson(final String url) {
-        final String json = web.getJson(url);
+        final String json = neverNull(web.getJson(url));
         if (errorhandling) {
-            gson.fromJson(neverNull(json), ErrorHandler.class)
+            gson.fromJson(json, ErrorHandler.class)
                 .handle();
         }
         return json;
+    }
+
+    private String neverNull(final String json) {
+        return (json != null) ? json : "{}";
     }
 
     private void loadProperties() {

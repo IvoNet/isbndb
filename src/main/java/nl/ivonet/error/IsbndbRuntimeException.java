@@ -16,11 +16,17 @@
 
 package nl.ivonet.error;
 
+import java.io.UnsupportedEncodingException;
+
 /**
  * @author Ivo Woltring
  */
 public class IsbndbRuntimeException extends RuntimeException {
     public IsbndbRuntimeException(final String error) {
         super(error);
+    }
+
+    public IsbndbRuntimeException(final String message, final UnsupportedEncodingException e) {
+        super(message, e);
     }
 }
