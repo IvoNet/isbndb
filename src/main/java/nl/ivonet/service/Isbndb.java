@@ -133,34 +133,6 @@ public class Isbndb {
         return getBookResponse(json);
     }
 
-    private String encodeId(final String value) {
-        String input = value.replace("-", "")
-                            .replace(" ", "")
-                            .replace(".", "")
-                            .replace("[", "")
-                            .replace("]", "")
-                            .replace("ISBN", "");
-
-        if (multipleIds(input)) {
-            // TODO: 28-06-2016 Dirty! sometimes an isbn is represented like this `isbn10/isbn13` this gives problems
-            // in the url. Might be better to throw an exception?!
-            input = input.split("/")[0];
-        }
-        return encode(input);
-    }
-
-    private boolean multipleIds(final String input) {
-        return input.contains("/");
-    }
-
-    private String encode(final String value) {
-        try {
-            return URLEncoder.encode(value, "UTF-8");
-        } catch (final UnsupportedEncodingException e) {
-            throw new IsbndbRuntimeException(e.getMessage(), e);
-        }
-    }
-
     public BookResponse getBookResponse(final String json) {
         final BookResponse response = this.gson.fromJson(json, BookResponse.class);
         response.setJson(json);
@@ -224,9 +196,8 @@ public class Isbndb {
      * @return {@link PublisherResponse}
      */
     public PublisherResponse publishersByName(final String name, final int page) {
-        final String json = getJson(new Builder().searchPublishers(name)
-                                                 .page(page));
-        return getPublisherResponse(json);
+        return getPublisherResponse(getJson(new Builder().searchPublishers(name)
+                                                         .page(page)));
     }
 
     /**
@@ -264,9 +235,8 @@ public class Isbndb {
      * @return {@link SubjectResponse}
      */
     public SubjectResponse subjectsByName(final String name, final int page) {
-        final String json = getJson(new Builder().searchSubjects(name)
-                                                 .page(page));
-        return getSubjectResponse(json);
+        return getSubjectResponse(getJson(new Builder().searchSubjects(name)
+                                                       .page(page)));
     }
 
     /**
@@ -276,8 +246,7 @@ public class Isbndb {
      * @return {@link CategoryResponse}
      */
     public CategoryResponse categoryById(final String id) {
-        final String json = getJson(new Builder().searchCategory(id));
-        return getCategoryResponse(json);
+        return getCategoryResponse(getJson(new Builder().searchCategory(id)));
     }
 
     public CategoryResponse getCategoryResponse(final String json) {
@@ -304,9 +273,8 @@ public class Isbndb {
      * @return {@link CategoryResponse}
      */
     public CategoryResponse categoriesByName(final String name, final int page) {
-        final String json = getJson(new Builder().searchCategories(name)
-                                                 .page(page));
-        return getCategoryResponse(json);
+        return getCategoryResponse(getJson(new Builder().searchCategories(name)
+                                                        .page(page)));
     }
 
     /**
@@ -343,8 +311,36 @@ public class Isbndb {
         this.errorhandling = true;
     }
 
+    private boolean multipleIds(final String input) {
+        return input.contains("/");
+    }
 
-    private String getJson(final Builder builder) {
+    private String encode(final String value) {
+        try {
+            return URLEncoder.encode(value, "UTF-8");
+        } catch (final UnsupportedEncodingException e) {
+            throw new IsbndbRuntimeException(e.getMessage(), e);
+        }
+    }
+
+    private String encodeId(final String value) {
+        String input = value.replace("-", "")
+                            .replace(" ", "")
+                            .replace(".", "")
+                            .replace("[", "")
+                            .replace("]", "")
+                            .replace("ISBN", "");
+
+        if (multipleIds(input)) {
+            // TODO: 28-06-2016 Dirty! sometimes an isbn is represented like this `isbn10/isbn13` this gives problems
+            // in the url. Might be better to throw an exception?!
+            input = input.split("/")[0];
+        }
+        return encode(input);
+    }
+
+
+    private synchronized String getJson(final Builder builder) {
 
         ErrorHandler errorHandler;
         String json;
