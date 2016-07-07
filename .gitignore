@@ -43,3 +43,4 @@ buildNumber.properties
 
 src/test/resources/isbndb.properties
 artifact/
+isbndb_keys.txt

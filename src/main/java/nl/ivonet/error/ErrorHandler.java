@@ -38,10 +38,17 @@ public class ErrorHandler {
         if (error.contains("'query' or 'q' is a required parameter")) {
             throw new IsbndbEmptyQueryException(error);
         }
+        if (error.contains("Daily request limit exceeded.")) {
+            throw new IsbndbDailyLimitExceeded(error);
+        }
         throw new IsbndbRuntimeException(error);
     }
 
-    private boolean noError() {
+    public boolean limitReached() {
+        return (!noError() && error.contains("Daily request limit exceeded.")) || keystats.memberLimitReached();
+    }
+
+    public boolean noError() {
         return (error == null) || error.isEmpty();
     }
 }

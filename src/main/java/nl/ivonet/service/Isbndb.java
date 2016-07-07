@@ -24,6 +24,7 @@ import nl.ivonet.boundary.PublisherResponse;
 import nl.ivonet.boundary.SubjectResponse;
 import nl.ivonet.error.ErrorHandler;
 import nl.ivonet.error.IsbndbRuntimeException;
+import nl.ivonet.io.ApiKeyResource;
 import nl.ivonet.io.GsonFactory;
 import nl.ivonet.io.WebResource;
 import nl.ivonet.service.EndpointBuilder.Builder;
@@ -47,8 +48,10 @@ public class Isbndb {
     private static final Logger LOG = LoggerFactory.getLogger(Isbndb.class);
     private final WebResource web;
     private final Gson gson;
+    private final ApiKeyResource apiKeyResource;
     private String apiKey;
     private boolean errorhandling;
+
 
     /**
      * Constructs a default Isbndb service.
@@ -63,6 +66,7 @@ public class Isbndb {
         web = WebResource.getInstance();
         gson = GsonFactory.getInstance()
                           .gson();
+        apiKeyResource = new ApiKeyResource();
     }
 
     /**
@@ -86,10 +90,7 @@ public class Isbndb {
      * @return {@link AuthorResponse}
      */
     public AuthorResponse authorById(final String id) {
-        final String json = getJson(new Builder(apiKey).searchAuthor(id)
-                                                       .build()
-                                                       .endpoint());
-        return getAuthorResponse(json);
+        return getAuthorResponse(getJson(new Builder().searchAuthor(id)));
 
     }
 
@@ -111,11 +112,8 @@ public class Isbndb {
      * @return {@link AuthorResponse}
      */
     public AuthorResponse authorsByName(final String name, final int page) {
-        final String json = getJson(new Builder(apiKey).searchAuthors(name)
-                                                       .page(page)
-                                                       .build()
-                                                       .endpoint());
-        return getAuthorResponse(json);
+        return getAuthorResponse(getJson(new Builder().searchAuthors(name)
+                                                      .page(page)));
     }
 
     public AuthorResponse getAuthorResponse(final String json) {
@@ -131,9 +129,7 @@ public class Isbndb {
      * @return {@link BookResponse}
      */
     public BookResponse bookById(final String id) {
-        final String json = getJson(new Builder(apiKey).searchBook(encodeId(id))
-                                                       .build()
-                                                       .endpoint());
+        final String json = getJson(new Builder().searchBook(encodeId(id)));
         return getBookResponse(json);
     }
 
@@ -146,6 +142,8 @@ public class Isbndb {
                             .replace("ISBN", "");
 
         if (multipleIds(input)) {
+            // TODO: 28-06-2016 Dirty! sometimes an isbn is represented like this `isbn10/isbn13` this gives problems
+            // in the url. Might be better to throw an exception?!
             input = input.split("/")[0];
         }
         return encode(input);
@@ -187,11 +185,8 @@ public class Isbndb {
      * @return {@link BookResponse}
      */
     public BookResponse booksByName(final String name, final int page) {
-        final String json = getJson(new Builder(apiKey).searchBooks(name)
-                                                       .page(page)
-                                                       .build()
-                                                       .endpoint());
-        return getBookResponse(json);
+        return getBookResponse(getJson(new Builder().searchBooks(name)
+                                                    .page(page)));
     }
 
     /**
@@ -201,9 +196,7 @@ public class Isbndb {
      * @return {@link PublisherResponse}
      */
     public PublisherResponse publisherById(final String name) {
-        final String json = getJson(new Builder(apiKey).searchPublisher(name)
-                                                       .build()
-                                                       .endpoint());
+        final String json = getJson(new Builder().searchPublisher(name));
         return getPublisherResponse(json);
     }
 
@@ -231,10 +224,8 @@ public class Isbndb {
      * @return {@link PublisherResponse}
      */
     public PublisherResponse publishersByName(final String name, final int page) {
-        final String json = getJson(new Builder(apiKey).searchPublishers(name)
-                                                       .page(page)
-                                                       .build()
-                                                       .endpoint());
+        final String json = getJson(new Builder().searchPublishers(name)
+                                                 .page(page));
         return getPublisherResponse(json);
     }
 
@@ -245,9 +236,7 @@ public class Isbndb {
      * @return {@link SubjectResponse}
      */
     public SubjectResponse subjectById(final String id) {
-        final String json = getJson(new Builder(apiKey).searchSubject(id)
-                                                       .build()
-                                                       .endpoint());
+        final String json = getJson(new Builder().searchSubject(id));
         return getSubjectResponse(json);
     }
 
@@ -275,10 +264,8 @@ public class Isbndb {
      * @return {@link SubjectResponse}
      */
     public SubjectResponse subjectsByName(final String name, final int page) {
-        final String json = getJson(new Builder(apiKey).searchSubjects(name)
-                                                       .page(page)
-                                                       .build()
-                                                       .endpoint());
+        final String json = getJson(new Builder().searchSubjects(name)
+                                                 .page(page));
         return getSubjectResponse(json);
     }
 
@@ -289,9 +276,7 @@ public class Isbndb {
      * @return {@link CategoryResponse}
      */
     public CategoryResponse categoryById(final String id) {
-        final String json = getJson(new Builder(apiKey).searchCategory(id)
-                                                       .build()
-                                                       .endpoint());
+        final String json = getJson(new Builder().searchCategory(id));
         return getCategoryResponse(json);
     }
 
@@ -319,10 +304,8 @@ public class Isbndb {
      * @return {@link CategoryResponse}
      */
     public CategoryResponse categoriesByName(final String name, final int page) {
-        final String json = getJson(new Builder(apiKey).searchCategories(name)
-                                                       .page(page)
-                                                       .build()
-                                                       .endpoint());
+        final String json = getJson(new Builder().searchCategories(name)
+                                                 .page(page));
         return getCategoryResponse(json);
     }
 
@@ -360,17 +343,35 @@ public class Isbndb {
         this.errorhandling = true;
     }
 
-    private String getJson(final String url) {
-        final String json = neverNull(web.getJson(url));
+
+    private String getJson(final Builder builder) {
+
+        ErrorHandler errorHandler;
+        String json;
+        while (true) {
+            json = neverNull(web.getJson(builder.apikey(apiKey)
+                                                .build()
+                                                .endpoint()));
+            errorHandler = gson.fromJson(json, ErrorHandler.class);
+            if (errorHandler.noError()) {
+                break;
+            }
+            if (errorHandler.limitReached()) {
+                if (apiKeyResource.hasMore()) {
+                    apiKey = apiKeyResource.next();
+                    continue;
+                }
+            }
+            break;
+        }
         if (errorhandling) {
-            gson.fromJson(json, ErrorHandler.class)
-                .handle();
+            errorHandler.handle();
         }
         return json;
     }
 
     private String neverNull(final String json) {
-        return (json != null) ? json : "{}";
+        return (json != null) ? json : "{\"error\":\"Answer was NULL\"}";
     }
 
     private void loadProperties() {

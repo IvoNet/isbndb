@@ -65,14 +65,14 @@ public class Keystats {
      * @return true if total member limit has been reached
      */
     public boolean memberLimitReached() {
-        return (freeUseLimit - memberUseGranted) == 0;
+        return (freeUseLimit - memberUseGranted) <= 0;
     }
 
     /**
      * @return true if current key limit has been reached.
      */
     public boolean keyLimitReached() {
-        return (freeUseLimit - keyUseGranted) == 0;
+        return (freeUseLimit - keyUseGranted) <= 0;
     }
 
 

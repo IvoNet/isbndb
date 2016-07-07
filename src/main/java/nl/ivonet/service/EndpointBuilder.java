@@ -38,6 +38,9 @@ final class EndpointBuilder {
         if (noSearchDefined(builder)) {
             throw new IllegalStateException("You must build a search.");
         }
+        if ((builder.key == null) || builder.key.isEmpty()) {
+            throw new IsbnInvalidApiKeyException("You must provide an API Key");
+        }
         String endpoint = String.format(builder.url, builder.key, builder.collection, builder.search);
         if (builder.page > 1) {
             endpoint += (endpoint.contains("?") ? "&" : "?") + "page=" + builder.page;
@@ -61,7 +64,7 @@ final class EndpointBuilder {
         private static final String STATS_OPTION = "opt=keystats";
         private static final String API_URL_SINGLE = API_URL + "/%s?" + STATS_OPTION;
         private static final String API_URL_COLLECTION = API_URL + "?q=%s&" + STATS_OPTION;
-        private final String key;
+        private String key;
         private String collection;
         private String search;
         private int page;
@@ -78,8 +81,17 @@ final class EndpointBuilder {
             this.key = key;
         }
 
+        public Builder() {
+            this.url = "";
+        }
+
         private static String removeAccents(final String text) {
             return (text == null) ? null : normalize(text, NFD).replaceAll("\\p{InCombiningDiacriticalMarks}+", "");
+        }
+
+        public final Builder apikey(final String key) {
+            this.key = key;
+            return this;
         }
 
         public final Builder searchAuthors(final String value) {

@@ -67,6 +67,10 @@ public class Response<T> {
         this.json = json;
     }
 
+    public boolean exceededDailyLimit() {
+        return ((error != null) && error.contains("Daily request limit exceeded.")) || keystats.memberLimitReached();
+    }
+
     public boolean hasError() {
         return (error != null) && !error.isEmpty();
     }
