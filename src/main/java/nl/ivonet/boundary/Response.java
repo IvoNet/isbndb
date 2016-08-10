@@ -75,6 +75,10 @@ public class Response<T> {
         return (error != null) && !error.isEmpty();
     }
 
+    public T first() {
+        return getData().isEmpty() ? null : getData().get(0);
+    }
+
     @Override
     public String toString() {
         return "Response{" + "indexSearched='" + indexSearched + '\'' + ", resultCount=" + resultCount + ", pageCount="

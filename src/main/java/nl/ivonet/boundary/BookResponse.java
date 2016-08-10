@@ -20,4 +20,5 @@ package nl.ivonet.boundary;
  * @author Ivo Woltring
  */
 public class BookResponse extends Response<Book> {
+
 }
